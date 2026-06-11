@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Abed Khorasani — Neural Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+/* ── Reset ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Inter',sans-serif;background:#fff;color:#0A0E1A;overflow-x:hidden;line-height:1.6}
+a{color:inherit;text-decoration:none}
+canvas{display:block}
+img{max-width:100%;display:block}
+
+/* ── Tokens ── */
+:root{
+  --blue:#2563EB;
+  --blue-light:#EEF4FF;
+  --blue-mid:#DBEAFE;
+  --ink:#0A0E1A;
+  --ink-2:#374151;
+  --ink-3:#6B7280;
+  --border:#E5E7EB;
+  --bg:#FFFFFF;
+  --bg-alt:#F8FAFF;
+  --radius:16px;
+  --radius-sm:10px;
+  --shadow:0 4px 24px rgba(10,14,26,0.07);
+  --shadow-lg:0 12px 48px rgba(10,14,26,0.12);
+}
+
+/* ── Nav ── */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(255,255,255,0.88);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.nav-inner{
+  max-width:1120px;margin:0 auto;padding:0 24px;
+  height:60px;display:flex;align-items:center;gap:32px;
+}
+.nav-logo{
+  font-family:'Instrument Serif',serif;font-size:1.15rem;
+  color:var(--ink);flex-shrink:0;
+}
+.nav-links{display:flex;gap:28px;margin-left:auto}
+.nav-links a{font-size:0.875rem;color:var(--ink-3);transition:color .2s}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{
+  background:var(--ink);color:#fff;
+  padding:9px 20px;border-radius:8px;
+  font-size:0.82rem;font-weight:500;
+  transition:background .2s,transform .15s;
+  white-space:nowrap;
+}
+.nav-cta:hover{background:#1a2030;transform:translateY(-1px)}
+.nav-ham{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;margin-left:auto}
+.nav-ham span{display:block;width:22px;height:2px;background:var(--ink-3);border-radius:2px}
+.nav-mob{display:none;flex-direction:column;background:#fff;border-top:1px solid var(--border);padding:16px 24px;gap:16px}
+.nav-mob a{font-size:0.9rem;color:var(--ink-2);padding:8px 0;border-bottom:1px solid var(--border)}
+.nav-mob.open{display:flex}
+
+/* ── Hero ── */
+.hero{
+  padding-top:120px;padding-bottom:0;
+  background:linear-gradient(180deg,#EEF4FF 0%,#F0F6FF 60%,#fff 100%);
+  text-align:center;overflow:hidden;
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  background:#fff;border:1px solid var(--border);
+  border-radius:99px;padding:6px 14px;
+  font-size:0.75rem;color:var(--ink-3);
+  font-family:'JetBrains Mono',monospace;
+  letter-spacing:0.04em;margin-bottom:28px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.06);
+}
+.dot-live{width:7px;height:7px;border-radius:50%;background:#22C55E;flex-shrink:0;animation:pulse-g 2s infinite}
+@keyframes pulse-g{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.4)}50%{box-shadow:0 0 0 7px rgba(34,197,94,0)}}
+.hero h1{
+  font-family:'Instrument Serif',serif;
+  font-size:clamp(2.6rem,6vw,4.8rem);
+  line-height:1.08;letter-spacing:-0.02em;
+  color:var(--ink);max-width:820px;margin:0 auto 20px;
+}
+.hero h1 em{font-style:italic;color:var(--blue)}
+.hero-sub{
+  font-size:1.05rem;color:var(--ink-3);
+  max-width:560px;margin:0 auto 36px;line-height:1.7;
+}
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:24px}
+.btn-primary{
+  background:var(--blue);color:#fff;
+  padding:13px 28px;border-radius:9px;font-size:0.875rem;font-weight:500;
+  transition:all .2s;
+}
+.btn-primary:hover{background:#1d4ed8;transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,99,235,0.25)}
+.btn-ghost{
+  background:#fff;color:var(--ink);border:1px solid var(--border);
+  padding:13px 28px;border-radius:9px;font-size:0.875rem;font-weight:500;
+  transition:all .2s;
+}
+.btn-ghost:hover{border-color:var(--blue);color:var(--blue)}
+.hero-trust{
+  font-size:0.75rem;color:var(--ink-3);margin-bottom:52px;
+  font-family:'JetBrains Mono',monospace;letter-spacing:0.06em;
+}
+.hero-trust span{color:var(--blue)}
+
+/* Hero mockup */
+.hero-mockup{
+  max-width:960px;margin:0 auto;
+  background:#fff;border:1px solid var(--border);
+  border-radius:var(--radius) var(--radius) 0 0;
+  box-shadow:0 -4px 60px rgba(37,99,235,0.08),0 0 0 1px rgba(255,255,255,0.8);
+  padding:20px;
+  display:grid;grid-template-columns:200px 1fr;gap:16px;
+  min-height:300px;
+}
+.mock-sidebar{
+  background:var(--bg-alt);border-radius:10px;
+  padding:16px;display:flex;flex-direction:column;gap:8px;
+}
+.mock-nav-item{
+  display:flex;align-items:center;gap:8px;
+  padding:7px 10px;border-radius:7px;
+  font-size:0.72rem;color:var(--ink-3);cursor:default;
+}
+.mock-nav-item.active{background:var(--blue-light);color:var(--blue);font-weight:500}
+.mock-nav-dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0;opacity:.6}
+.mock-main{display:flex;flex-direction:column;gap:14px}
+.mock-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.mock-stat{
+  background:var(--bg-alt);border-radius:10px;padding:14px 16px;
+}
+.mock-stat-num{font-family:'Instrument Serif',serif;font-size:1.8rem;color:var(--blue);line-height:1}
+.mock-stat-label{font-size:0.68rem;color:var(--ink-3);margin-top:3px;font-family:'JetBrains Mono',monospace}
+.mock-chart-area{
+  background:var(--bg-alt);border-radius:10px;flex:1;padding:14px;
+  display:flex;flex-direction:column;gap:8px;
+}
+.mock-chart-label{font-size:0.68rem;color:var(--ink-3);font-family:'JetBrains Mono',monospace}
+
+/* ── Logos strip ── */
+.logos{padding:28px 24px;border-bottom:1px solid var(--border)}
+.logos-inner{max-width:960px;margin:0 auto;text-align:center}
+.logos-label{font-size:0.72rem;color:var(--ink-3);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:18px;font-family:'JetBrains Mono',monospace}
+.logos-row{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:32px}
+.logo-pill{
+  font-size:0.82rem;font-weight:500;color:var(--ink-3);
+  padding:6px 14px;border:1px solid var(--border);border-radius:99px;
+  background:#fff;
+}
+
+/* ── Sections ── */
+.section{padding:100px 24px}
+.section-alt{background:var(--bg-alt)}
+.container{max-width:1120px;margin:0 auto}
+
+/* Feature block */
+.feature{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:64px;align-items:center;
+}
+.feature.flip .feat-text{order:2}
+.feature.flip .feat-mock{order:1}
+
+.feat-eyebrow{
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--blue);margin-bottom:14px;display:block;
+}
+.feat-title{
+  font-family:'Instrument Serif',serif;
+  font-size:clamp(1.8rem,3.5vw,2.6rem);
+  line-height:1.12;letter-spacing:-0.01em;
+  color:var(--ink);margin-bottom:16px;
+}
+.feat-title em{font-style:italic;color:var(--blue)}
+.feat-body{font-size:0.95rem;color:var(--ink-3);line-height:1.75;margin-bottom:24px}
+.feat-results{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.feat-result{display:flex;align-items:baseline;gap:10px}
+.feat-result-num{
+  font-family:'Instrument Serif',serif;font-size:1.6rem;
+  color:var(--blue);line-height:1;flex-shrink:0;
+}
+.feat-result-label{font-size:0.82rem;color:var(--ink-3)}
+.feat-tags{display:flex;flex-wrap:wrap;gap:7px}
+.feat-tag{
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.66rem;letter-spacing:0.04em;
+  padding:4px 10px;border-radius:5px;
+  background:var(--blue-light);color:var(--blue);border:1px solid var(--blue-mid);
+}
+.feat-link{
+  display:inline-flex;align-items:center;gap:6px;
+  margin-top:20px;font-size:0.875rem;font-weight:500;color:var(--blue);
+  transition:gap .2s;
+}
+.feat-link:hover{gap:10px}
+
+/* Floating mockup card */
+.feat-mock{position:relative}
+.mock-card{
+  background:#fff;border:1px solid var(--border);
+  border-radius:var(--radius);box-shadow:var(--shadow-lg);
+  padding:20px;overflow:hidden;
+}
+.mock-card-header{
+  display:flex;align-items:center;gap:8px;margin-bottom:14px;
+}
+.mock-dots span{
+  display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:4px;
+}
+.mock-dots span:nth-child(1){background:#FF5F57}
+.mock-dots span:nth-child(2){background:#FFBD2E}
+.mock-dots span:nth-child(3){background:#28C840}
+.mock-card-title{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--ink-3)}
+.mock-badge{
+  margin-left:auto;padding:3px 9px;border-radius:5px;
+  font-family:'JetBrains Mono',monospace;font-size:0.63rem;
+}
+.mock-badge.live{background:#DCFCE7;color:#16A34A}
+.mock-badge.patent{background:#FEF3C7;color:#D97706}
+.mock-badge.wip{background:var(--blue-light);color:var(--blue)}
+
+/* ── Impact / stats section ── */
+.impact-section{padding:80px 24px;background:var(--ink);text-align:center}
+.impact-eyebrow{
+  font-family:'JetBrains Mono',monospace;font-size:0.7rem;
+  letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.4);
+  margin-bottom:14px;display:block;
+}
+.impact-title{
+  font-family:'Instrument Serif',serif;font-size:clamp(2rem,4vw,3rem);
+  color:#fff;margin-bottom:56px;line-height:1.1;
+}
+.impact-title em{font-style:italic;color:#93C5FD}
+.impact-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:rgba(255,255,255,0.08);
+  border-radius:var(--radius);overflow:hidden;
+  max-width:860px;margin:0 auto 56px;
+}
+.impact-cell{
+  background:rgba(255,255,255,0.04);
+  padding:36px 28px;
+}
+.impact-num{
+  font-family:'Instrument Serif',serif;font-size:3rem;
+  color:#fff;line-height:1;margin-bottom:6px;
+}
+.impact-unit{
+  font-family:'JetBrains Mono',monospace;font-size:0.68rem;
+  letter-spacing:0.08em;color:#93C5FD;text-transform:uppercase;margin-bottom:8px;display:block;
+}
+.impact-desc{font-size:0.83rem;color:rgba(255,255,255,0.5);line-height:1.55}
+
+.collab-row{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:12px;
+  max-width:760px;margin:0 auto;
+}
+.collab-chip{
+  background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);
+  border-radius:99px;padding:7px 16px;
+  font-size:0.8rem;color:rgba(255,255,255,0.65);
+}
+
+/* ── Philosophy / skills ── */
+.phil-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:20px;
+}
+.phil-card{
+  background:#fff;border:1px solid var(--border);border-radius:var(--radius);
+  padding:28px;transition:box-shadow .2s,transform .2s;
+}
+.phil-card:hover{box-shadow:var(--shadow);transform:translateY(-2px)}
+.phil-card-icon{font-size:1.4rem;margin-bottom:14px;display:block}
+.phil-card h3{
+  font-family:'Instrument Serif',serif;font-size:1.1rem;
+  margin-bottom:10px;color:var(--ink);
+}
+.phil-card p{font-size:0.875rem;color:var(--ink-3);line-height:1.7}
+
+/* ── Timeline ── */
+.timeline-wrap{max-width:680px}
+.timeline{position:relative;padding-left:28px}
+.timeline::before{
+  content:'';position:absolute;left:5px;top:6px;bottom:6px;
+  width:1px;background:linear-gradient(to bottom,var(--blue),rgba(37,99,235,0.1));
+}
+.tl-item{position:relative;padding-bottom:32px}
+.tl-item:last-child{padding-bottom:0}
+.tl-dot{
+  position:absolute;left:-25px;top:5px;
+  width:12px;height:12px;border-radius:50%;
+  background:#fff;border:2px solid var(--border);
+}
+.tl-item.cur .tl-dot{border-color:var(--blue);background:var(--blue);box-shadow:0 0 10px rgba(37,99,235,.3)}
+.tl-year{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--blue);letter-spacing:.06em;display:block;margin-bottom:3px}
+.tl-item h4{font-weight:600;font-size:0.9rem;margin-bottom:5px}
+.tl-item p{font-size:0.84rem;color:var(--ink-3);line-height:1.65}
+
+/* ── Notebook ── */
+.notebook-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.note-card{
+  background:#fff;border:1px solid var(--border);border-radius:var(--radius);
+  padding:28px;transition:box-shadow .2s,transform .2s;
+}
+.note-card:hover{box-shadow:var(--shadow);transform:translateY(-2px)}
+.note-cat{
+  font-family:'JetBrains Mono',monospace;font-size:0.67rem;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--blue);
+  margin-bottom:12px;display:block;
+}
+.note-card h4{font-size:0.95rem;font-weight:600;margin-bottom:10px;line-height:1.35}
+.note-card p{font-size:0.85rem;color:var(--ink-3);line-height:1.7;margin-bottom:14px}
+.note-soon{
+  font-family:'JetBrains Mono',monospace;font-size:0.67rem;
+  color:#9CA3AF;
+}
+
+/* ── Contact ── */
+.contact-section{padding:100px 24px;text-align:center}
+.contact-section h2{
+  font-family:'Instrument Serif',serif;
+  font-size:clamp(2rem,4vw,3.2rem);
+  margin-bottom:16px;
+}
+.contact-section h2 em{font-style:italic;color:var(--blue)}
+.contact-section p{font-size:1rem;color:var(--ink-3);max-width:480px;margin:0 auto 40px;line-height:1.7}
+.contact-links{
+  display:flex;flex-direction:column;gap:12px;
+  max-width:460px;margin:0 auto 36px;text-align:left;
+}
+.contact-link{
+  display:flex;align-items:center;gap:16px;
+  padding:16px 20px;background:#fff;
+  border:1px solid var(--border);border-radius:10px;
+  transition:border-color .2s,transform .2s;
+}
+.contact-link:hover{border-color:var(--blue);transform:translateX(3px)}
+.contact-icon{
+  width:36px;height:36px;border-radius:8px;background:var(--blue-light);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;flex-shrink:0;color:var(--blue);
+}
+.contact-type{font-family:'JetBrains Mono',monospace;font-size:0.67rem;color:var(--blue);letter-spacing:.06em;display:block;margin-bottom:2px}
+.contact-val{font-size:0.85rem;color:var(--ink-3)}
+.contact-location{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'JetBrains Mono',monospace;font-size:0.72rem;
+  color:#9CA3AF;letter-spacing:.04em;
+}
+
+/* ── Footer ── */
+footer{
+  background:var(--ink);padding:20px 24px;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:8px;
+}
+footer span{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:rgba(255,255,255,0.3);letter-spacing:.04em}
+
+/* ── Section header ── */
+.section-head{text-align:center;margin-bottom:56px}
+.section-head .eyebrow{
+  font-family:'JetBrains Mono',monospace;font-size:0.7rem;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--blue);
+  margin-bottom:14px;display:block;
+}
+.section-head h2{
+  font-family:'Instrument Serif',serif;
+  font-size:clamp(2rem,4vw,3rem);line-height:1.1;color:var(--ink);
+}
+.section-head h2 em{font-style:italic;color:var(--blue)}
+.section-head p{font-size:1rem;color:var(--ink-3);max-width:520px;margin:14px auto 0;line-height:1.7}
+
+/* ── Reveal ── */
+[data-r]{opacity:0;transform:translateY(24px);transition:opacity .55s ease,transform .55s ease}
+[data-r].vis{opacity:1;transform:translateY(0)}
+
+/* ── Responsive ── */
+@media(max-width:860px){
+  .feature{grid-template-columns:1fr;gap:36px}
+  .feature.flip .feat-text{order:0}
+  .feature.flip .feat-mock{order:0}
+  .hero-mockup{grid-template-columns:1fr}
+  .mock-sidebar{display:none}
+  .impact-grid{grid-template-columns:1fr 1fr}
+  .phil-grid{grid-template-columns:1fr}
+  .notebook-grid{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .nav-links{display:none}
+  .nav-ham{display:flex}
+  .nav-cta{display:none}
+  .impact-grid{grid-template-columns:1fr}
+  .hero h1{font-size:2.2rem}
+  .logos-row{gap:12px}
+}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#top" class="nav-logo">Abed Khorasani</a>
+    <div class="nav-links">
+      <a href="#projects">Projects</a>
+      <a href="#impact">Impact</a>
+      <a href="#philosophy">Philosophy</a>
+      <a href="#notebook">Notebook</a>
+    </div>
+    <a href="#contact" class="nav-cta">Get in touch</a>
+    <button class="nav-ham" id="ham" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="nav-mob" id="mob">
+    <a href="#projects">Projects</a>
+    <a href="#impact">Impact</a>
+    <a href="#philosophy">Philosophy</a>
+    <a href="#notebook">Notebook</a>
+    <a href="#contact">Get in touch</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-eyebrow"><span class="dot-live"></span>Research Assistant Professor · Northwestern University</div>
+  <h1>Building technology<br/>that <em>heals the<br/>nervous system.</em></h1>
+  <p class="hero-sub">I design wearable biosensors, closed-loop neuromodulation systems, and AI models that give stroke survivors their arms back — deployed in real homes, tested in real patients.</p>
+  <div class="hero-btns">
+    <a href="#projects" class="btn-primary">See what I've built</a>
+    <a href="#philosophy" class="btn-ghost">How I think</a>
+  </div>
+  <p class="hero-trust">Collaborated with <span>Myomo</span> · <span>Meta Reality Labs</span> · <span>MindMaze</span> · <span>Sibel Health</span> · <span>SpineX</span></p>
+
+  <!-- Hero mockup -->
+  <div class="hero-mockup">
+    <div class="mock-sidebar">
+      <div class="mock-nav-item active"><span class="mock-nav-dot"></span>MINT Trial</div>
+      <div class="mock-nav-item"><span class="mock-nav-dot"></span>EMG Sensors</div>
+      <div class="mock-nav-item"><span class="mock-nav-dot"></span>Spinal Stim</div>
+      <div class="mock-nav-item"><span class="mock-nav-dot"></span>Brain–Spinal</div>
+      <div class="mock-nav-item"><span class="mock-nav-dot"></span>Publications</div>
+    </div>
+    <div class="mock-main">
+      <div class="mock-stats">
+        <div class="mock-stat"><div class="mock-stat-num">7.8×</div><div class="mock-stat-label">arm recovery vs sham</div></div>
+        <div class="mock-stat"><div class="mock-stat-num">76%</div><div class="mock-stat-label">co-activation reduction</div></div>
+        <div class="mock-stat"><div class="mock-stat-num">315</div><div class="mock-stat-label">reps/day · 10× therapy</div></div>
+      </div>
+      <div class="mock-chart-area">
+        <div class="mock-chart-label">// Live EMG · CH1–CH4 · MINT Trial n=59</div>
+        <canvas id="heroCanvas" height="160"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGOS -->
+<div class="logos">
+  <div class="logos-inner">
+    <div class="logos-label">Clinical & Industry Collaborations</div>
+    <div class="logos-row">
+      <span class="logo-pill">Northwestern Memorial Hospital</span>
+      <span class="logo-pill">Shirley Ryan AbilityLab</span>
+      <span class="logo-pill">Myomo Inc.</span>
+      <span class="logo-pill">Meta Reality Labs</span>
+      <span class="logo-pill">MindMaze Inc.</span>
+      <span class="logo-pill">Sibel Health</span>
+    </div>
+  </div>
+</div>
+
+<!-- PROJECT 1: MINT -->
+<section class="section" id="projects">
+  <div class="container">
+    <div class="feature" data-r>
+      <div class="feat-text">
+        <span class="feat-eyebrow">Wearable Device · Clinical Trial · EMG</span>
+        <h2 class="feat-title">MINT — <em>the rehab<br/>that goes home<br/>with the patient.</em></h2>
+        <p class="feat-body">After stroke, the brain rewires abnormally, locking muscles into co-activation patterns that most clinicians consider permanent. MINT trains stroke survivors to break those patterns at home — unsupervised, gamified, for 8 weeks straight.</p>
+        <div class="feat-results">
+          <div class="feat-result"><span class="feat-result-num">7.8×</span><span class="feat-result-label">better arm recovery versus sham (n=59 RCT)</span></div>
+          <div class="feat-result"><span class="feat-result-num">76%</span><span class="feat-result-label">reduction in abnormal co-activation</span></div>
+          <div class="feat-result"><span class="feat-result-num">315</span><span class="feat-result-label">reps/day — over 10× conventional therapy</span></div>
+        </div>
+        <div class="feat-tags">
+          <span class="feat-tag">Delsys Trigno EMG</span>
+          <span class="feat-tag">Real-time signal proc.</span>
+          <span class="feat-tag">Python · MATLAB</span>
+          <span class="feat-tag">Gamified UX</span>
+          <span class="feat-tag">Wearable IMU</span>
+        </div>
+        <a href="#contact" class="feat-link">Learn more →</a>
+      </div>
+      <div class="feat-mock">
+        <div class="mock-card">
+          <div class="mock-card-header">
+            <div class="mock-dots"><span></span><span></span><span></span></div>
+            <span class="mock-card-title">MINT · EMG Decoupling</span>
+            <span class="mock-badge live">● RCT Complete</span>
+          </div>
+          <canvas id="mintCanvas" width="420" height="220" style="width:100%;border-radius:8px"></canvas>
+          <div style="margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:#9CA3AF">// M1 + M2 co-activation — before vs. after 8 weeks MINT</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECT 2: EMG Sensors -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="feature flip" data-r>
+      <div class="feat-mock">
+        <div class="mock-card">
+          <div class="mock-card-header">
+            <div class="mock-dots"><span></span><span></span><span></span></div>
+            <span class="mock-card-title">Wearable Sensor Platform</span>
+            <span class="mock-badge wip">◈ Active Dev</span>
+          </div>
+          <canvas id="sensorCanvas" width="420" height="220" style="width:100%;border-radius:8px"></canvas>
+          <div style="margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:#9CA3AF">// Wireless EMG + IMU · skin-conformable · week-long recording</div>
+        </div>
+      </div>
+      <div class="feat-text">
+        <span class="feat-eyebrow">Hardware Design · Wearable Engineering</span>
+        <h2 class="feat-title">Sensors that<br/><em>survive real life.</em></h2>
+        <p class="feat-body">Engineered flexible, wireless EMG + IMU wearables across 21 design iterations (10 hardware, 11 firmware), validated in 11 participants (5 healthy, 6 stroke). Achieves week-long continuous recording with full waterproofing, low-profile form factor, and reliable adhesion over high-strain sites — including the medial thigh adductors in larger individuals.</p>
+        <div class="feat-results">
+          <div class="feat-result"><span class="feat-result-num">21</span><span class="feat-result-label">design iterations (10 hardware + 11 firmware)</span></div>
+          <div class="feat-result"><span class="feat-result-num">7+</span><span class="feat-result-label">days continuous wear, waterproof, any conditions</span></div>
+        </div>
+        <div class="feat-tags">
+          <span class="feat-tag">Altium Designer</span>
+          <span class="feat-tag">Flexible PCB</span>
+          <span class="feat-tag">BLE wireless</span>
+          <span class="feat-tag">IMU fusion</span>
+          <span class="feat-tag">Skin-conformable</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECT 3: Spinal Stim -->
+<section class="section">
+  <div class="container">
+    <div class="feature" data-r>
+      <div class="feat-text">
+        <span class="feat-eyebrow">Closed-Loop · Neuromodulation · AI</span>
+        <h2 class="feat-title">EMG-driven<br/><em>spinal stimulation</em><br/>at home.</h2>
+        <p class="feat-body">A closed-loop system where multi-channel EMG decodes movement intent from the patient's skin surface, and drives adaptive spinal cord stimulation parameters in real time — every 50ms, no implants, no clinician required. A time-series language model (TSLM) coaches the patient like a therapist throughout.</p>
+        <div class="feat-tags">
+          <span class="feat-tag">TSLM (AI decoder)</span>
+          <span class="feat-tag">Non-invasive SCS</span>
+          <span class="feat-tag">50ms loop</span>
+          <span class="feat-tag">PyTorch</span>
+          <span class="feat-tag">Real-time C++</span>
+        </div>
+        <a href="#contact" class="feat-link">Collaborate on this →</a>
+      </div>
+      <div class="feat-mock">
+        <div class="mock-card">
+          <div class="mock-card-header">
+            <div class="mock-dots"><span></span><span></span><span></span></div>
+            <span class="mock-card-title">Closed-Loop SCS · Control Loop</span>
+            <span class="mock-badge wip">◈ In Progress</span>
+          </div>
+          <canvas id="scsCanvas" width="420" height="220" style="width:100%;border-radius:8px"></canvas>
+          <div style="margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:#9CA3AF">// EMG intent → decode → adaptive stimulation · 50ms cycle</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECT 4: Brain-Spinal -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="feature flip" data-r>
+      <div class="feat-mock">
+        <div class="mock-card">
+          <div class="mock-card-header">
+            <div class="mock-dots"><span></span><span></span><span></span></div>
+            <span class="mock-card-title">Brain → FPGA → Spinal Interface</span>
+            <span class="mock-badge patent">⬡ US Patent 12,390,643</span>
+          </div>
+          <canvas id="bsiCanvas" width="420" height="220" style="width:100%;border-radius:8px"></canvas>
+          <div style="margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:#9CA3AF">// Cortical LFP decode → epidural stimulation · &lt;1ms latency</div>
+        </div>
+      </div>
+      <div class="feat-text">
+        <span class="feat-eyebrow">Neural Interface · FPGA · SCI</span>
+        <h2 class="feat-title">Rerouting the<br/><em>nervous system</em><br/>around injury.</h2>
+        <p class="feat-body">Co-built a brain-to-spinal interface: decoded cortical LFPs on a modular FPGA platform and triggered epidural spinal stimulation with sub-millisecond latency, restoring 38% of forelimb movement in a cervical SCI model. The underlying stimulation patent is now licensed to SpineX, Inc.</p>
+        <div class="feat-results">
+          <div class="feat-result"><span class="feat-result-num">38%</span><span class="feat-result-label">forelimb movement restored in cervical SCI model</span></div>
+          <div class="feat-result"><span class="feat-result-num">&lt;1ms</span><span class="feat-result-label">decode-to-stimulate latency</span></div>
+        </div>
+        <div class="feat-tags">
+          <span class="feat-tag">Blackrock Microsystems</span>
+          <span class="feat-tag">FPGA (Xilinx)</span>
+          <span class="feat-tag">LFP decoding</span>
+          <span class="feat-tag">Epidural SCS</span>
+          <span class="feat-tag">C++ real-time</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT -->
+<section class="impact-section" id="impact">
+  <span class="impact-eyebrow">Research impact</span>
+  <h2 class="impact-title">Numbers that <em>mean something.</em></h2>
+  <div class="impact-grid">
+    <div class="impact-cell">
+      <div class="impact-num" data-count="59">0</div>
+      <span class="impact-unit">patients</span>
+      <p class="impact-desc">Enrolled in the MINT RCT — largest study of home-based myoelectric conditioning for chronic stroke</p>
+    </div>
+    <div class="impact-cell">
+      <div class="impact-num" data-count="40">0</div>
+      <span class="impact-unit">publications</span>
+      <p class="impact-desc">30 as first author, across IEEE, Nature, Frontiers, and top rehab journals</p>
+    </div>
+    <div class="impact-cell">
+      <div class="impact-num" data-count="1">0</div>
+      <span class="impact-unit">US Patent</span>
+      <p class="impact-desc">High-frequency epidural stimulation — licensed to SpineX, Inc. for commercial development</p>
+    </div>
+    <div class="impact-cell">
+      <div class="impact-num">$200K+</div>
+      <span class="impact-unit">active grants</span>
+      <p class="impact-desc">Meta Reality Labs ($150K Co-I) + Northwestern MedTech Studio ($50K PI), 2026–2028</p>
+    </div>
+    <div class="impact-cell">
+      <div class="impact-num" data-count="9">0</div>
+      <span class="impact-unit">mentored</span>
+      <p class="impact-desc">PhD and MSc students across 4 universities; 3 mentees published peer-reviewed papers</p>
+    </div>
+    <div class="impact-cell">
+      <div class="impact-num" data-count="21">0</div>
+      <span class="impact-unit">iterations</span>
+      <p class="impact-desc">Hardware + firmware design cycles on the wearable EMG sensor platform — and counting</p>
+    </div>
+  </div>
+  <div class="collab-row">
+    <span class="collab-chip">Northwestern Memorial Hospital</span>
+    <span class="collab-chip">Shirley Ryan AbilityLab</span>
+    <span class="collab-chip">University of Washington</span>
+    <span class="collab-chip">Myomo Inc.</span>
+    <span class="collab-chip">Meta Reality Labs</span>
+    <span class="collab-chip">MindMaze Inc.</span>
+    <span class="collab-chip">SpineX Inc.</span>
+    <span class="collab-chip">Sibel Health</span>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="section" id="philosophy">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Engineering philosophy</span>
+      <h2>How I approach <em>hard problems.</em></h2>
+      <p>Four principles that show up in every project — from PCB layout to clinical protocol design.</p>
+    </div>
+    <div class="phil-grid">
+      <div class="phil-card" data-r>
+        <span class="phil-card-icon">⬡</span>
+        <h3>Start with the patient</h3>
+        <p>Every system begins with a clinical problem, not a technical one. The technology should be invisible — what matters is whether a stroke survivor can lift their arm after 8 weeks. I've watched participants cry when they do things they haven't done in years. That's the metric that counts.</p>
+      </div>
+      <div class="phil-card" data-r>
+        <span class="phil-card-icon">◈</span>
+        <h3>Close the loop</h3>
+        <p>Open-loop systems are guesses. I build feedback-driven systems that sense, decode, decide, and act in real time — from adaptive spinal stimulators that respond to EMG intent, to sleep-stage therapies triggered by brain oscillations. The biology provides the signal; the engineering provides the response.</p>
+      </div>
+      <div class="phil-card" data-r>
+        <span class="phil-card-icon">⬡</span>
+        <h3>Build it, then break it</h3>
+        <p>I've designed PCBs, written firmware, built ML pipelines, and run clinical trials — sometimes on the same project. If it doesn't survive a patient's home for 8 weeks, it doesn't exist yet. 21 hardware iterations on our sensor platform weren't failures — they were data.</p>
+      </div>
+      <div class="phil-card" data-r>
+        <span class="phil-card-icon">◈</span>
+        <h3>Ship a working prototype</h3>
+        <p>Papers matter. Patents matter. But a blinking LED on a breadboard you built yourself tells you something a simulation never will. The constraint of real hardware forces decisions. I'd rather have a flawed working system than a perfect theoretical one.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:64px" data-r>
+      <h3 style="font-family:'Instrument Serif',serif;font-size:1.4rem;margin-bottom:32px">The engineering journey</h3>
+      <div class="timeline-wrap">
+        <div class="timeline">
+          <div class="tl-item"><div class="tl-dot"></div><span class="tl-year">2011–2013</span><h4>First closed loop</h4><p>Adaptive neuro-fuzzy controllers for FES, restoring walking in rodent paralysis models. First encounter with the frustrating magic of biological systems.</p></div>
+          <div class="tl-item"><div class="tl-dot"></div><span class="tl-year">2013–2018</span><h4>Decoding the motor cortex</h4><p>PhD: real-time LFP decoding for robotic arm control. Learned that noise is biology's way of telling you your model is wrong.</p></div>
+          <div class="tl-item"><div class="tl-dot"></div><span class="tl-year">2017–2018</span><h4>Brain to spinal cord</h4><p>University of Washington: co-built an FPGA-based brain-to-spine interface. Saw a rat regain 38% of forelimb movement. That result shaped everything that followed.</p></div>
+          <div class="tl-item"><div class="tl-dot"></div><span class="tl-year">2021–2025</span><h4>From animal models to patients</h4><p>Northwestern: ran a 59-patient RCT with MINT. Went from idea → wearable system → home deployment → published trial. 7.8× better recovery.</p></div>
+          <div class="tl-item cur"><div class="tl-dot"></div><span class="tl-year">2025–now</span><h4>Closing the loop at the spinal cord</h4><p>Non-invasive closed-loop spinal stimulation driven by decoded EMG intent — and AI coaching systems that deliver therapy at home, in real time.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NOTEBOOK -->
+<section class="section section-alt" id="notebook">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Engineering notebook</span>
+      <h2>Thinking <em>out loud.</em></h2>
+      <p>Technical insights, build logs, and lessons from 10+ years of making things that had to work in real patients.</p>
+    </div>
+    <div class="notebook-grid">
+      <div class="note-card" data-r>
+        <span class="note-cat">Signal Processing</span>
+        <h4>Why artifact rejection is harder than it looks</h4>
+        <p>The EMG signal lives in 20–500 Hz. Motion artifacts live in 0–20 Hz. Sounds simple to separate — until you're in a patient's home and they reach for a glass of water. Here's what I learned about adaptive methods that don't throw away the signal with the noise.</p>
+        <span class="note-soon"># coming soon</span>
+      </div>
+      <div class="note-card" data-r>
+        <span class="note-cat">Clinical Engineering</span>
+        <h4>Running a clinical trial is an engineering problem</h4>
+        <p>Device failures at 11pm. IRB amendments. Data pipelines that break when a patient accidentally updates iOS. The MINT trial taught me that deploying a medical device is 30% science and 70% operations.</p>
+        <span class="note-soon"># coming soon</span>
+      </div>
+      <div class="note-card" data-r>
+        <span class="note-cat">Neurotechnology</span>
+        <h4>The future of rehab is closed-loop and continuous</h4>
+        <p>Conventional therapy: 45 minutes, 3× a week. Our patients did 315 reps/day. The math is simple — high-dose, high-frequency therapy delivered by an intelligent wearable is where rehabilitation is going.</p>
+        <span class="note-soon"># coming soon</span>
+      </div>
+      <div class="note-card" data-r>
+        <span class="note-cat">Hardware Build</span>
+        <h4>21 iterations to make a sensor that survives real life</h4>
+        <p>Lab-grade hardware is a different species from clinical wearables. Electrode impedance shifts with sweat. Cables fail at flex points. These are the design decisions that made the difference between week 1 and week 8.</p>
+        <span class="note-soon"># coming soon</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <span style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);display:block;margin-bottom:14px">Get in touch</span>
+  <h2 style="font-family:'Instrument Serif',serif;font-size:clamp(2rem,4vw,3.2rem);margin-bottom:16px">Let's build <em style="font-style:italic;color:var(--blue)">something.</em></h2>
+  <p style="font-size:1rem;color:var(--ink-3);max-width:480px;margin:0 auto 40px;line-height:1.7">I'm open to collaborations in neural engineering, wearable biosensors, AI-driven rehabilitation, and clinical translation — academic, clinical, or industry.</p>
+  <div class="contact-links">
+    <a href="mailto:abedkh@northwestern.edu" class="contact-link">
+      <div class="contact-icon">✉</div>
+      <div><span class="contact-type">Email</span><span class="contact-val">abedkh@northwestern.edu</span></div>
+    </a>
+    <a href="https://linkedin.com/in/abedkh" target="_blank" class="contact-link">
+      <div class="contact-icon">in</div>
+      <div><span class="contact-type">LinkedIn</span><span class="contact-val">linkedin.com/in/abedkh</span></div>
+    </a>
+    <a href="https://github.com/abedkh" target="_blank" class="contact-link">
+      <div class="contact-icon">&lt;/&gt;</div>
+      <div><span class="contact-type">GitHub</span><span class="contact-val">github.com/abedkh</span></div>
+    </a>
+    <a href="https://scholar.google.com/citations?user=abedkh" target="_blank" class="contact-link">
+      <div class="contact-icon">◎</div>
+      <div><span class="contact-type">Google Scholar</span><span class="contact-val">Abedkh — 40 publications</span></div>
+    </a>
+  </div>
+  <div class="contact-location"><span class="dot-live"></span>Chicago, IL · Northwestern University · Dept. of Neurology</div>
+</section>
+
+<footer>
+  <span>Abed Khorasani © 2026</span>
+  <span>Neural Engineer · Builder · Researcher</span>
+</footer>
+
+<script>
+// ── Nav hamburger ──────────────────────────────
+document.getElementById('ham').addEventListener('click',()=>{
+  document.getElementById('mob').classList.toggle('open');
+});
+document.querySelectorAll('.nav-mob a').forEach(a=>a.addEventListener('click',()=>{
+  document.getElementById('mob').classList.remove('open');
+}));
+
+// ── Reveal on scroll ───────────────────────────
+const ro = new IntersectionObserver((entries)=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting){setTimeout(()=>e.target.classList.add('vis'),i*70);ro.unobserve(e.target);}
+  });
+},{threshold:0.1});
+document.querySelectorAll('[data-r]').forEach(el=>ro.observe(el));
+
+// ── Counter animation ──────────────────────────
+function animCount(el,to,ms=1200){
+  let s=0,start=null;
+  (function step(ts){
+    if(!start)start=ts;
+    const p=Math.min((ts-start)/ms,1),ease=1-Math.pow(1-p,3);
+    el.textContent=Math.floor(ease*to);
+    if(p<1)requestAnimationFrame(step);else el.textContent=to;
+  })(performance.now());
+}
+const co=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){animCount(e.target,parseInt(e.target.dataset.count));co.unobserve(e.target);}});
+},{threshold:.5});
+document.querySelectorAll('[data-count]').forEach(el=>co.observe(el));
+
+// ── Canvas helpers ─────────────────────────────
+function resize(canvas){
+  const w=canvas.offsetWidth||canvas.parentElement.offsetWidth||420;
+  canvas.width=w*(devicePixelRatio||1);
+  canvas.height=canvas.height*(devicePixelRatio||1)||(220*(devicePixelRatio||1));
+  canvas.getContext('2d').scale(devicePixelRatio||1,devicePixelRatio||1);
+  canvas._w=w;canvas._h=parseInt(canvas.style.height||220);
+}
+
+// ── Hero Canvas: 4-channel EMG ─────────────────
+(function(){
+  const c=document.getElementById('heroCanvas');
+  const ctx=c.getContext('2d');
+  let t=0,af;
+  function draw(){
+    const W=c.parentElement.offsetWidth-2||600,H=160;
+    if(c.width!==W*(devicePixelRatio||1)){c.width=W*(devicePixelRatio||1);c.height=H*(devicePixelRatio||1);ctx.scale(devicePixelRatio||1,devicePixelRatio||1);}
+    ctx.clearRect(0,0,W,H);
+    // Grid
+    ctx.strokeStyle='rgba(37,99,235,0.06)';ctx.lineWidth=1;
+    for(let i=0;i<=8;i++){ctx.beginPath();ctx.moveTo(i/8*W,0);ctx.lineTo(i/8*W,H);ctx.stroke();}
+    for(let j=0;j<=4;j++){ctx.beginPath();ctx.moveTo(0,j/4*H);ctx.lineTo(W,j/4*H);ctx.stroke();}
+    // 4 channels
+    const chs=[
+      {y:.18,a:.06,f:2.1,ph:0,c:'rgba(37,99,235,'},
+      {y:.38,a:.05,f:3.2,ph:1.1,c:'rgba(37,99,235,'},
+      {y:.58,a:.055,f:1.9,ph:2.3,c:'rgba(37,99,235,'},
+      {y:.78,a:.04,f:4.0,ph:.6,c:'rgba(37,99,235,'},
+    ];
+    chs.forEach((ch,i)=>{
+      ctx.beginPath();
+      for(let p=0;p<=W;p++){
+        const nx=p/W;
+        const s=(Math.sin(nx*12*ch.f+t+ch.ph)+.3*Math.sin(nx*25*ch.f+t*1.7)+.1*(Math.random()-.5))*ch.a*H;
+        p===0?ctx.moveTo(p,ch.y*H+s):ctx.lineTo(p,ch.y*H+s);
+      }
+      ctx.strokeStyle=ch.c+(i===0?.55:.35)+')';ctx.lineWidth=i===0?1.5:1;
+      ctx.shadowBlur=i===0?6:2;ctx.shadowColor='rgba(37,99,235,.2)';
+      ctx.stroke();ctx.shadowBlur=0;
+    });
+    // Labels
+    ctx.font='9px JetBrains Mono,monospace';ctx.fillStyle='rgba(37,99,235,.4)';
+    chs.forEach((ch,i)=>ctx.fillText('CH'+(i+1),4,ch.y*H-4));
+    t+=.016;af=requestAnimationFrame(draw);
+  }
+  const obs=new IntersectionObserver(e=>{
+    if(e[0].isIntersecting){if(!af)draw();}else{cancelAnimationFrame(af);af=null;}
+  });obs.observe(c);draw();
+})();
+
+// ── MINT canvas: before/after EMG coupling ─────
+(function(){
+  const c=document.getElementById('mintCanvas');
+  if(!c)return;
+  const ctx=c.getContext('2d');
+  let t=0,af;
+  function draw(){
+    const W=c.offsetWidth||420,H=220;
+    if(c.width!==W*(devicePixelRatio||1)){c.width=W*(devicePixelRatio||1);c.height=H*(devicePixelRatio||1);ctx.scale(devicePixelRatio||1,devicePixelRatio||1);}
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle='#F8FAFF';ctx.fillRect(0,0,W,H);
+    // Labels
+    ctx.font='9px JetBrains Mono,monospace';
+    ctx.fillStyle='rgba(107,114,128,.8)';ctx.fillText('BEFORE',8,16);
+    ctx.fillStyle='rgba(37,99,235,.8)';ctx.fillText('AFTER MINT',8,H/2+16);
+    // Divider
+    ctx.strokeStyle='rgba(229,231,235,.8)';ctx.setLineDash([4,4]);ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(0,H/2);ctx.lineTo(W,H/2);ctx.stroke();ctx.setLineDash([]);
+    // Before: coupled (both fire together)
+    [[H*.22,'rgba(37,99,235,',0],[H*.36,'rgba(245,158,11,',0.05]].forEach(([by,col,ph])=>{
+      ctx.beginPath();
+      for(let x=0;x<=W-16;x++){
+        const nx=x/(W-16),s=(Math.sin(nx*10+t+ph)+.3*Math.abs(Math.sin(nx*4+t*.5))+(nx*4+t*.5>0&&Math.sin(nx*4+t*.5)>.7?.25:0))*16;
+        x===0?ctx.moveTo(10+x,by+s):ctx.lineTo(10+x,by+s);
+      }
+      ctx.strokeStyle=col+'.55)';ctx.lineWidth=1.4;ctx.stroke();
+    });
+    // After: decoupled (independent)
+    [[H/2+H*.12,'rgba(37,99,235,',0,1],[H/2+H*.26,'rgba(245,158,11,',2.2,1.3]].forEach(([by,col,ph,fr])=>{
+      ctx.beginPath();
+      for(let x=0;x<=W-16;x++){
+        const nx=x/(W-16),s=(Math.sin(nx*8*fr+t*1.2+ph)*.4+.15*Math.sin(nx*20+t*3)*Math.max(0,Math.sin(nx*3+t))+.04*(Math.random()-.5))*18;
+        x===0?ctx.moveTo(10+x,by+s):ctx.lineTo(10+x,by+s);
+      }
+      ctx.strokeStyle=col+'.7)';ctx.lineWidth=1.4;ctx.stroke();
+    });
+    // Legend
+    ctx.font='8px JetBrains Mono,monospace';
+    ctx.fillStyle='rgba(37,99,235,.5)';ctx.fillText('M1',W-26,H*.22-4);
+    ctx.fillStyle='rgba(245,158,11,.5)';ctx.fillText('M2',W-26,H*.36-4);
+    ctx.fillStyle='rgba(37,99,235,.6)';ctx.fillText('M1',W-26,H/2+H*.12-4);
+    ctx.fillStyle='rgba(245,158,11,.6)';ctx.fillText('M2',W-26,H/2+H*.26-4);
+    t+=.02;af=requestAnimationFrame(draw);
+  }
+  const obs=new IntersectionObserver(e=>{if(e[0].isIntersecting){if(!af)draw();}else{cancelAnimationFrame(af);af=null;}});
+  obs.observe(c);
+})();
+
+// ── Sensor canvas: wireless EMG signal quality ─
+(function(){
+  const c=document.getElementById('sensorCanvas');
+  if(!c)return;
+  const ctx=c.getContext('2d');
+  let t=0,af;
+  function draw(){
+    const W=c.offsetWidth||420,H=220;
+    if(c.width!==W*(devicePixelRatio||1)){c.width=W*(devicePixelRatio||1);c.height=H*(devicePixelRatio||1);ctx.scale(devicePixelRatio||1,devicePixelRatio||1);}
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle='#F8FAFF';ctx.fillRect(0,0,W,H);
+    // 3 EMG channels + 1 IMU
+    const chans=[
+      {y:H*.18,a:22,f:2.1,ph:0,col:'rgba(37,99,235,',label:'EMG·CH1'},
+      {y:H*.38,a:18,f:3.1,ph:1.0,col:'rgba(37,99,235,',label:'EMG·CH2'},
+      {y:H*.58,a:16,f:2.6,ph:2.1,col:'rgba(37,99,235,',label:'EMG·CH3'},
+      {y:H*.78,a:12,f:.8,ph:.5,col:'rgba(16,185,129,',label:'IMU·AX'},
+    ];
+    chans.forEach(ch=>{
+      ctx.beginPath();
+      for(let x=0;x<=W-16;x++){
+        const nx=x/(W-16);
+        const s=(Math.sin(nx*10*ch.f+t+ch.ph)+.2*Math.sin(nx*22*ch.f+t*2)+.06*(Math.random()-.5))*ch.a;
+        x===0?ctx.moveTo(10+x,ch.y+s):ctx.lineTo(10+x,ch.y+s);
+      }
+      ctx.strokeStyle=ch.col+'.6)';ctx.lineWidth=1.3;ctx.stroke();
+      ctx.font='9px JetBrains Mono,monospace';ctx.fillStyle=ch.col+'.5)';ctx.fillText(ch.label,6,ch.y-6);
+    });
+    // Wireless indicator
+    ctx.font='9px JetBrains Mono,monospace';ctx.fillStyle='rgba(22,163,74,.7)';
+    ctx.fillText('● BLE connected · '+Math.round(3.7+Math.sin(t*.3)*.05)+'V · '+Math.round(98+Math.sin(t*.5)*1.5)+'% signal',W-220,16);
+    t+=.018;af=requestAnimationFrame(draw);
+  }
+  const obs=new IntersectionObserver(e=>{if(e[0].isIntersecting){if(!af)draw();}else{cancelAnimationFrame(af);af=null;}});
+  obs.observe(c);
+})();
+
+// ── SCS canvas: closed-loop control loop ───────
+(function(){
+  const c=document.getElementById('scsCanvas');
+  if(!c)return;
+  const ctx=c.getContext('2d');
+  let t=0,af;
+  function draw(){
+    const W=c.offsetWidth||420,H=220;
+    if(c.width!==W*(devicePixelRatio||1)){c.width=W*(devicePixelRatio||1);c.height=H*(devicePixelRatio||1);ctx.scale(devicePixelRatio||1,devicePixelRatio||1);}
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle='#F8FAFF';ctx.fillRect(0,0,W,H);
+    const cx=W/2,cy=H/2,rx=Math.min(W*.34,130),ry=Math.min(H*.36,62);
+    // Loop ellipse
+    ctx.beginPath();ctx.ellipse(cx,cy,rx,ry,0,0,Math.PI*2);
+    ctx.strokeStyle='rgba(37,99,235,.1)';ctx.lineWidth=1;ctx.setLineDash([5,5]);ctx.stroke();ctx.setLineDash([]);
+    // Moving signal dot
+    const a=t*.75;
+    const dx=cx+rx*Math.cos(a),dy=cy+ry*Math.sin(a);
+    ctx.beginPath();ctx.arc(dx,dy,5,0,Math.PI*2);ctx.fillStyle='rgba(37,99,235,.85)';ctx.fill();
+    ctx.beginPath();ctx.arc(dx,dy,10,0,Math.PI*2);ctx.fillStyle='rgba(37,99,235,.15)';ctx.fill();
+    // Nodes
+    const nodes=[
+      {a:-Math.PI/2,l:'EMG SENSE',s:'surface'},
+      {a:0,l:'AI DECODE',s:'intent',hi:true},
+      {a:Math.PI/2,l:'SCS STIM',s:'adaptive'},
+      {a:Math.PI,l:'MUSCLE',s:'response'},
+    ];
+    const r=24;
+    nodes.forEach(n=>{
+      const nx=cx+rx*Math.cos(n.a),ny=cy+ry*Math.sin(n.a);
+      const pulse=n.hi?1+.06*Math.sin(t*5):1;
+      ctx.beginPath();ctx.arc(nx,ny,r*pulse,0,Math.PI*2);
+      ctx.fillStyle='#fff';ctx.fill();
+      ctx.strokeStyle=n.hi?'rgba(37,99,235,.7)':'rgba(229,231,235,1)';
+      ctx.lineWidth=n.hi?2:1.5;ctx.stroke();
+      ctx.font='bold 7.5px JetBrains Mono,monospace';ctx.textAlign='center';
+      ctx.fillStyle=n.hi?'rgba(37,99,235,.9)':'rgba(55,65,81,.8)';
+      ctx.fillText(n.l,nx,ny+2);
+      ctx.font='6.5px JetBrains Mono,monospace';ctx.fillStyle='rgba(107,114,128,.6)';
+      ctx.fillText(n.s,nx,ny+13);
+    });
+    ctx.textAlign='left';
+    ctx.font='9px JetBrains Mono,monospace';ctx.fillStyle='rgba(37,99,235,.35)';
+    ctx.fillText('50ms cycle',W-72,H-10);
+    t+=.018;af=requestAnimationFrame(draw);
+  }
+  const obs=new IntersectionObserver(e=>{if(e[0].isIntersecting){if(!af)draw();}else{cancelAnimationFrame(af);af=null;}});
+  obs.observe(c);
+})();
+
+// ── BSI canvas: brain → FPGA → spine ──────────
+(function(){
+  const c=document.getElementById('bsiCanvas');
+  if(!c)return;
+  const ctx=c.getContext('2d');
+  let t=0,af;
+  function draw(){
+    const W=c.offsetWidth||420,H=220;
+    if(c.width!==W*(devicePixelRatio||1)){c.width=W*(devicePixelRatio||1);c.height=H*(devicePixelRatio||1);ctx.scale(devicePixelRatio||1,devicePixelRatio||1);}
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle='#F8FAFF';ctx.fillRect(0,0,W,H);
+    const nodes=[
+      {x:W*.12,y:H*.5,l:'CORTEX',s:'LFP signal'},
+      {x:W*.38,y:H*.5,l:'DECODE',s:'FPGA <1ms',hi:true},
+      {x:W*.62,y:H*.5,l:'STIM',s:'epidural'},
+      {x:W*.88,y:H*.5,l:'SPINAL',s:'motor out'},
+    ];
+    const r=Math.min(W*.068,26);
+    // Connections
+    for(let i=0;i<nodes.length-1;i++){
+      const a=nodes[i],b=nodes[i+1];
+      ctx.beginPath();ctx.moveTo(a.x+r,a.y);ctx.lineTo(b.x-r,b.y);
+      ctx.strokeStyle='rgba(37,99,235,.2)';ctx.lineWidth=1.5;ctx.stroke();
+      const ax=b.x-r,ay=b.y;
+      ctx.beginPath();ctx.moveTo(ax,ay);ctx.lineTo(ax-7,ay-4);ctx.lineTo(ax-7,ay+4);
+      ctx.closePath();ctx.fillStyle='rgba(37,99,235,.2)';ctx.fill();
+    }
+    // Signal packet
+    const sp=((t*55)%(W*.78))+W*.12;
+    ctx.beginPath();ctx.arc(sp,H*.5,4,0,Math.PI*2);ctx.fillStyle='rgba(37,99,235,.8)';ctx.fill();
+    ctx.beginPath();ctx.arc(sp,H*.5,8,0,Math.PI*2);ctx.fillStyle='rgba(37,99,235,.15)';ctx.fill();
+    // Nodes
+    nodes.forEach(n=>{
+      const pulse=n.hi?1+.07*Math.sin(t*5):1;
+      ctx.beginPath();ctx.arc(n.x,n.y,r*pulse,0,Math.PI*2);
+      ctx.fillStyle='#fff';ctx.fill();
+      ctx.strokeStyle=n.hi?'rgba(37,99,235,.7)':'rgba(229,231,235,1)';
+      ctx.lineWidth=n.hi?2:1.5;ctx.stroke();
+      ctx.font='bold 8px JetBrains Mono,monospace';ctx.textAlign='center';
+      ctx.fillStyle=n.hi?'rgba(37,99,235,.9)':'rgba(55,65,81,.8)';
+      ctx.fillText(n.l,n.x,n.y+3);
+      ctx.font='7px JetBrains Mono,monospace';ctx.fillStyle='rgba(107,114,128,.6)';
+      ctx.fillText(n.s,n.x,n.y+16);
+    });
+    ctx.textAlign='left';
+    ctx.font='9px JetBrains Mono,monospace';ctx.fillStyle='rgba(37,99,235,.35)';
+    ctx.fillText('<1ms latency',W*.35,H*.25);
+    t+=.018;af=requestAnimationFrame(draw);
+  }
+  const obs=new IntersectionObserver(e=>{if(e[0].isIntersecting){if(!af)draw();}else{cancelAnimationFrame(af);af=null;}});
+  obs.observe(c);
+})();
+
+// ── Hero load animation ────────────────────────
+document.addEventListener('DOMContentLoaded',()=>{
+  ['.hero-eyebrow','.hero h1','.hero-sub','.hero-btns','.hero-trust'].forEach((sel,i)=>{
+    const el=document.querySelector(sel);if(!el)return;
+    el.style.cssText='opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease';
+    setTimeout(()=>{el.style.opacity='1';el.style.transform='translateY(0)'},180+i*110);
+  });
+});
+</script>
+</body>
+</html>
