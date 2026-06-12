@@ -369,6 +369,10 @@ footer span{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:rgba(
     <button class="proj-nav-item" onclick="showPanel('train')">
       <span class="pni-dot"></span>Train Monitoring
     </button>
+    <div style="height:1px;background:var(--border);margin:10px 0"></div>
+    <button class="proj-nav-item" onclick="showPanel('news')" style="color:#DC2626">
+      <span class="pni-dot" style="background:#DC2626"></span>📰 News & Recognition
+    </button>
   </div>
 
   <!-- Panels -->
@@ -414,7 +418,7 @@ footer span{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:rgba(
           <div class="card">
             <span class="card-label">Patient — Before &amp; After MINT</span>
             <div class="video-wrap"><iframe src="https://www.youtube.com/embed/Hbcf2UDwtjU?rel=0&modestbranding=1" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe></div>
-            <div class="chart-caption" style="margin-top:8px">Chronic stroke survivor · &gt;5 years post-stroke · 6-week home-based MINT therapy</div>
+            <div class="chart-caption" style="margin-top:8px">Chronic stroke survivor · &gt;5 years post-stroke · 8-week home-based MINT therapy</div>
           </div>
           <div class="card">
             <span class="card-label">Results — Wolf Motor Function Test</span>
@@ -544,7 +548,7 @@ footer span{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:rgba(
                 <div style="border-radius:8px;overflow:hidden;border:1px solid var(--border);margin-bottom:6px;background:#f0f0f0;display:flex;align-items:center;justify-content:center;min-height:120px">
                   <img src="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCADpAKEDASIAAhEBAxEB/8QAHQAAAAYDAQAAAAAAAAAAAAAAAAMEBQYIAQIHCf/EAEMQAAIBAwIEBAMEBwQKAwEAAAECAwAEEQUSBiExQQcTIlEyYXEIFEKBFRYjkaGxwVJi0eEJFyQzNFNUZPDxRHJzwv/EABoBAAIDAQEAAAAAAAAAAAAAAAECAAMEBQb/xAAlEQACAgICAQQCAwAAAAAAAAAAAQIRAwQhMRITIiNBMjMUUXH/2gAMAwEAAhEDEQA/ALe6nfiyKgqG3fOkP6f5/wDDH99F8U9bcfI0zGlbCkPv6d/7c0P07/25pioUCND42vqvWAiizxJj/wCKf30zNRE3LFGyEgTiP/tT++t/1hXGTbkVGlrejYCQHiNP+nND9ZE/6c/vqO1H+P8Aie24W0Ca8kKtOwxFGT1Pv9KK7ogPEnxstuEb6Kxg0eXUruXAEKSgHcThV+pqYRcZmHSEv9TsFtZDEHeLfllJHw/M1Xbwh0eXiHW5vEfiZiLRJG/R6OM7j0MmPpyFdYSG41K4W9v1aOFTmCHPPP8AaahklTIlZE/FH7Ta8DcSRaJNwnLdSyRLIWW4AxuPIYPfrSvgv7R8PEOmazcvwzLZz6aQBC84Jk+lcp8TvDrVeMfF46lErRWNssYMjDG7HPA966JoPhzoul3NxcxWji5u2LTMxyCSc9Ky5NpQXBsw6jmrfRO+GvGMat6pOHp7eIjKuWzkYqQ2/iHYzNtFu6t2DDGahkWirDGqQgAe1HDTwBgqBWdbrf0af4UK4JpBxqZbhojp7KBjDk+k/wAKJvOP47e4it/uBeSR9oG6ojp8wt5DaSthR/uyen0Jo5NDsf0g183myOfhDSE7PlXVww9Rpp8HOytYk1Jc/ROE4rz1tCKdNF1RtQL5h8vZ7mudyWEuM2ty6EdAxyKffDS5v5Z9Qtb6Fk8raVY/C1acuKEI8HPx5pPJ4snWaFZoVkNpH+KuT26/I/zplp74s+OH6f1pkpCWbVisUKgQUXL2ow0XN2puyBEfxilApKh9WfalWeVQAnvZ4ra3kuJnCRRoWZj0FVt4qu9S8UuOV0mwizp8TEzyk+mGLPc+7fyqa+PPFztD+rejI91O5AlEZPqc/DHy+mT8qaNV4R1DhLwluFsbp49VmKz388Zw8mTzTPsOg+lFtRXJIxc3SHjiTj7hXg6GDT7dl1S8towkdtDzhixyxXN9T8T+OLzU4b0SrBFv/Z2yryI9z3rn1vqJsUctHGbhmyZpuePoPeidHvX13iew0m3uz5lzMqtdycxHnPMDv3qt+7l9Fi8l+PZZ/g3jy11SaO1vIful4uA6sRyY9se1T9IzKcr8PY1xDgbwo1jTeN7yT9ITz6XJChS4lGHd8cwB+6u76bp72ljHCJDLsGCT1Nc7PCPlwatSey5NTXBnyFVMe1ESrt2kHkTilKAyEqW69q0nGJcZ5KKqqJvTob7q0SXOQKIsLi4huPu1y2R+Bvcf404M/wAqbtUtfvCZbcrDmpBrRg2PRlf0Z9jXjljT7FMrSWwDRnfD+JR1FS3gGeC5SR4mz6RkY6VBtF1ASF7a5IEydR7ipl4d26Qz3kkRGxyMgdjXdyZYShaZ52OF48vJM80KGaFY7Ngw8V/HD9KYzT3xZ8cP0pjHOgkFIxQoUKgTOKTzdqPzSe4YBiTyxUIFp1/Oj/IursGG0j3FjgvnkF7mnLRNEN0EuLg4jIyoB5mpTBbRW6bYY0T/AOoqAZH+HuCeH9FjzBYQz3LMWkuJkDu7HqcmiePeELXXtEmtoY445Sp28uR5dDUlSXbGfOITB7mmTUuIYl3RWcfnv/aPw/50uRxq5FmJS8vaU54k8BeKr/ioWiXUMOn+YS0ruSVH07n/AM712Pwy8HuFODoEdbVb+/AGbicbtp/ujtXRQhZmkc5d23MfnRkPpPSudLLJ8fR044ork22RqwYrk/XkKy7AR4P4qzKRvKj8NFNNyXYe2TVfZYnRoCobJGD3pPqGcbo2wRyP0oTuBIT7im9njkl2K5U9wTU7IGeXtzz6kmgUZ1KjmCQDW4RpAQvMgZx70WJWSPYARk5yRQfAyT+iO2t5HpfFz2l+qiOVNtuxHXDcx8u1dN4I+7+bObfOGwTkY965vxxo6a3pp2MILqP1RTAepG9x9aefAO51YjUrLWYdtzbEDeOkg7EVq15tvxZXtQg8LlXJ1mhQoVv8Thke4t+OH6f1piHOn3i34ofp/WmNaDHswTWc4rNJbm6VfREcv/KklkjFWyyGNzdBs06xJuPXsPemyWWa4kYk7RQdGJ3O+5j1NGxJuO0HFc/NsOXR0sWuo9jhw5q0mmXWyeUG1kOWB/AfcfKpRea3ZwL6JBMx6Kp61C/KZetKYIQiAcv3VIbE0qQMurCUrYr1K7udRfEnKL/lr8P+dJlAiACqAKWQqAOlIrmVGkyhyO/0pZSlJ3IthBRVI0iklbJ28vetnk2wqwPbNFrIq8j1PSipHCSH05B7ZpBg2Yl4o5Vkw3LPKi5X2oHHUVmPA5qco3akl5chSEZFGT2puiBkjjyxuG7bRbQxu2SK0TyZzgDBH8aWRREEMDgioQFlBsY7txOOppQ9sJB0zRgTaWfGPlRMEpMmw9DTVRBFOFhk2GINUg8PgjS3UmwBmwCfyptvlUwnJ6cxTj4e/wDE3SjoFX+VPg/YivZfwsmfOhQoV0zi2R7i34ofp/WufaxxlotjcGzjuBd33a1t/Ux/wpu+0pZcVarqmiaPoV3LaWsyObuZG2gAEZ5/n0pJwdwppvDtikVvGJbjrLcyDdI5+tZM2woOkbNfWc+X0SG3v764jElxELYMM+VnJH1PvRkasxzW0K56jNLIodo6da585Obs6Ucaj0YjjLNgc6U+WyY75OK2i8tUFb7xgkANg881KsZAyI0yxrMUiyI5TmAM5pLcz74Mqmctgc+tap5UfIry7CiiB0bsM+rPr7miY32ncmc56mt2OGU4G0DoeoNJ5crjI6timYoJidpIGf6U33N4be6UPzXnk5oy6m8mHGfzpFdbJpORypFAKQ7QSBbfI5g8xSS7kiMnrH0raLlGf7vKm+ePzHCjqGJqNBHS1Ct2wx9qcomIIUchTdZb8LvYH2paDirYoD7D2bIKqedJkOLop/GthLyJWsF8esjmetFqgXRm8BZD9MU7eHZzPdHHUCmOef0/DT54eY867P0psX5oq2f1MmdCsUK6FnGsgfiewSW2P9xsD8qh9pc4t/Mzux+HuamPiYFae1Vhn0nH8Ki9tYbJlclcLzwDnNcbaXys72o6wpiiK4P7NQjDdzzijoZJixIcMflSeeMo4cerHRaNeJosSqMDbubbzwKSJY2LIEJLKu8lemR0FbKebsxyx5/WtrcgKWDMWYY60WEAusRklfnVt0VsMZ4vu+cUROXBEjfCBgfWs3BVWJzzLdKBc+QVdc9hTdkCjcRpEFkba5GTWjuREr4/EOWaSXccry8uaryFbzTf7Myueg5e1BsNGbySF7UoWyx6cqQTHy32RnDgYzRMgiWZWONxXaMHNayuVfJAYtz59qA1B/myx/F0NL7QFkUOBn3xTTa4uLkyOCFU4GR1p3tyARmjRG6FkTqd3P5VsrDBB70nBx05g1r5qgseuacRcirNEzTKpwTSeWX5U26tq+nWMLS3V3DGF7M4zTdiylGEXKTpDhcXKBeZNSXwzkV5L0qScFf61zTT9fstXtXmtGYxxNt9Qwc10DwjkWS4v8Z5babEn6lMqy5IZNfzg7R0ahWKFb6ORZD/ABAgWWW3Y8iByNMEFuJIigJDJzDdz9alHGZ2zWv0NRzzGUgodprmbEfedjXl8KNJ/RAyBUBI5AnmKUQoDahByz3pJeyBJGlbaT7daFq7sclu2arLvo2t5B5rqRgqxyKy8g3nAB+tEP6ZZJxzDnkKKFwi9eeRmikSg64kULuHPFJYrhrlMnKgfPNI5roM7MpwopLDMELKrFQelSw0Od0WDK+eTD1Cm+9kWVolVjz6/nWl1cspKZyaZ57j9sGXI5c6AyVjk4xcBjt9PYDFBdzyBj0FJUPqDgkr2PvUn4G02HV750ndlRF3FR3p4R8nQuTIsatiG3gkdhsGT7U8Wel385Ait2I9zXQLDRdNsceTbruH4jzNLcxgAIByrXj1/wCznz3l9ELg4Wu2jBlnjiPUKR0Nc64k4ktNEvp7W5J86NWcoOuF7/8AnvXcb5yioVP4qpj9rNLmPVL/AFHTjta3uAkjf2UYD+pp54ItUDDuN3Y3caeOWoXMbwaTB9wt+izStlyT7e3+dcd1rjW/ur83rXMt1cE5aR2Oce9R2ae2UiW5kku5QfVk+gfSlWhwR6nqqW01pI0cnIiNOY+lW4sMUjLsZPVi4yXDO6+FWu3M0KypkwSqCSoyOX/urK+AF396l1Ibs7Qn8qqtwki6DZvApMcLMTGjnLKPY1Yv7Kt4LuTW2DZxs/Lkapr5bLNfWWpqvGnd8/4d6oUKFaDMRHj6dbeSzZxlDkGo394U/CM07+Kk6xx2qsOxNQy2v12qqd+prn5vzZ19bnEh3uEEj4IzQeWMA4J58iKaJ71Bg79xxjkaLe/Ctj0H6Gq+zQkLrm43naSQvtTaJy6SZcnYSgHypHcXPpJFEC4hVDGPj27mOaHQyNri9Mb7VjATGc9hW1g5LMzH2xSCSVdwOc5GcURLPIsYZlUZ9xk0vYw53FyrsQjZ96bXmbfhTypruL+KNdzOSe4A6Umh1SMsWTJx1p1FsPlRKRO2wKO1TPwoulGvPG2RuiNcml1hVQsWC49zWdH48fQtRj1G3kido8jax5GrsMakZNl+UaLUPdRqeeaZE1XT7K8vJrvUII0kKlVLcxgc6q9xN44XtyzAakBnpHAOVQa+4s1zUmLQxTMCchpmIB/fW55Eujl+gvtlsuMPFDhuzgMVpeC6nVuQjPL99Vx8Qtbs9bW/++Sqy3mS+T3xXObm91e4kLS320j8EYzijP0QhzNqErzNgbVY8hVUpORbBRxqiKWvDGiQXeyS9nviTlI0XHL5/OpPpxeCH7vpmnx2kf8AbYVrfaSk7K0QNq4OQ6dRRiXF3YIFv7cSW3QzxjmR8xUtk8xQtncynMt1IW919KCrF/Y5toLZtdWFndj5e5nYknriq72d/b6iWiik8uFBnAbrVj/sf+WW1sxc12xc/frUiubFnNtUWGxQoYoVbZScu8aphFJYBuZIcCoDa3CQsUaXKt1GKmvjwubjTyDzCuQPeucxKTL5m0424HKudnVzOvrcY0L/ALwnn5XBXsAa1a4VGAC7WPXvSR2VUUufS3b3o22RDu9IzyqtIvNpp0yCWPOkZLSPLIzZ3tyP0pXJDy3MACOlN+o3qQRHnUaGToxNMlum52B+hqO8T8SCOJ0iZlk9h2ph4t4k8gFY5AOufVioFeajqWqyOLXIQ9ZX/pVsMTfJTkzRTokd5r4wjPL6VOfSaSx8XTPCUs4mkcd1HSmm30lXmCzv5hPXPP8AhTmLaO1ixjavtt61dGFGWWdvoy0/EN/8UiRRnryyab5NH+8zFGe4uXJ5ZPKn6zt5LoBmzDEBgljjNZn1G2tB92sEw/4nB51CmWSTCI9L0vSog86RvNjkg7H50lu7y5vX8pcqh9jigsUkzNLenG7otYWUykpAdir+Id6ZIrcmzCmG0GyP1EdT70cPMIBdC79ox1rCQiI7U5sGy0zcwvyFGFvMmEdsC7Pne55Yp0hWzEjpBLmVw0h/3ca/hrO2Uv59yEfuqf41tGkVlPtiXzpyCN7dTWyOxAJxJIOpPRaPQBsv9LtpmMxiKSH4QjYLGrE/Yytbq2bXhcT+aGEW056df8q4JKyxSYTe8x6jOcH5VYL7HSSAa40zguwjyB25UUxZIsVQoUKcBy3xwlWKSwBCnKv1H0rlF1emLMcTYz1ro/2hZWjm01F5blbmelcT1DU7e0JZ3LfOsWRWzraz+IfZbkOyOTnaMYrB1e1jUu0yqB33VzbXeMILWJ3e4CnsueZ+lR4axqesIr2oMNufxE9aEYFmTLGKs6nq/GVrBGdk+NvXn1qCavxdc3pZbBWlIyoYimFLAyHfPM87LzLucinWziSEARACPHNT/wCfxq2OJGKey5dDalpLcTtc6g/nFhyRugNOPkLGAq4+gHppb5MauZCzL8s8hWdPt5byVGRAkOMgk9c9aZ1DhFPk5dhLRhwEhHqaj7a0Szj+8anIJHYYEZOcH+lHXV9a6VCYYgsk7dJD1FR5mur6R5nlYRBs9+Wfak8rD0KdV1O6vHNvCWSDomD1oslbMhgBJN15jI/zrDXMVsPLt1PmDrnv9a0iUmZS5zKe3tTdCtmVkkmk8yd8AAAAcs/WlSwItrzHlRMc7R8TfWk9zNFA+8oJptwwOwPyrK+qQXF3u3YyFBpkhGwwme7VlYJFEhx/9qURyrDGscCE4GDz60nlnHlqZCVQjO0jBpDcXJfCxjao9hRsiFpm3bo1bAb45G6mk82oKg2Qk7u7Y+GkTyNjmxprvta06yDrJOGPsnOjTY1pD798EZeSIl5Hzz9qsZ9jCcyfp93JZiY+ePlVPpOLYUfEFrI49zyq032CtVk1RuJTJGE2eURz980yjQrkmWtoUMUKYQ4n9pbmdMB7o/8AMVV7iS6kSZ0HSrUfaKi859MXbnCOf5VWniKwR7qVQMkcqw5JVI62srxnI9YSS4uDJOWIB5AnIFTfhq3K6THGV8x1XcAvY0xcR2yW8rx45g9fepdw4gi0SDzP2YCgekYzVmKXkZ9lUhVHA4VdoB7n2Hz+dKJLhY5Aq+p2G32o+3jl1BvLsF2oBlpD3+lHXT6fpG6TIlmPxEHOD8verJOjIkELaQon3nUXCwqu9UHUmkerayDI9vZo0UX4FHc0gv7291GR8Z2k5z0ojz4bcLIpYy9GJ65+VLLktXBlIkVxNcEknseY/OsSXbTfs4htUdW/s/Sk81wZUEs74TGAD3xWm8tGwlVYYT8Ix1qRiBuwz1CUCFTz+KXoB9KCzNkQ2JSWTnuf8X50Qks12wEaeXbIeuMZo7IiVljgB3HJYch+dWeIjYZAsdsvmE+ZOxLFh2Pyo2d1jTzJGMjnmqdBn3pPCWRfRuLYO6TGAo+VIo3Lyk89qnlk1ACpVM07XF1J+eOlN2t6xaabGTJl3/Ai9SPn7Ul4g1aOwgO31zH4Fz/Go7p+mTarP597K3lnJZ+hY/KmSIxHqetajqDn1MkfZVOM/X3rWy0a7vFEkaEhu9P3EkdrbaTHFbwKqo3M/ibl3NE6fqH3DT4vLkUhhnA7VYoFbZm14bVBuudyN2UdBVtvsMaZBp8evywoVWUR9e+P/dVDvNelk25kLAHO3HI1bX7Cl7Lex6+0rEkCIc/z/wAKVprsPZaahQoVCHI/Ho/ttP8A/wA3H8q4JrlvH94d9vPFdy+0W4V7BC23Mchz+YrgGqXBjt3lkfAAya52de87Om6xo5nxsoXUCijHOptwzpUv3O3+/vsgC9B3+g96h9/PHNxJbeYfQJQzZGfpUivtWmvAsSK7RLyIHX/1V2FUjJtSt0OWq6zDaQtaWAUIQVbaf5mmORZJI99xLsR+jOOeKKYxQvul2SyH8RXp8qa9TvnvQfuzNtbqzHOPz7CmbsydCy7vdsaxWvJvcdqQszBSVUu/UqKIWV2cpDgEAkvn+VYeZIVEMB3yv8RHc0UrGc7FDssY3zkyMB6UB/kK2gTz/Lnucgdkoi2jVG82d9z9uVH82UyP6SeidzViiK2KJnLRIIhsQnG8dq2RmYBUysYPPPX6mi1gD7BLLsXaMc8AfSg8/paO3BZOag09CtmmqSxKpghOWPxMPakiuIsyMQFA50muX/2gqSCVAU880n1CcrZyAtzK8h70sgjDK/6Q1A3MhPlhsBexH1p7gdWRY7eIsVGABTZp1qMrEW28u45D61M9NgtrKIXBKlyAQGXI/OmgwSGK9sV+4SNdEq7JuXB/jUPuYHjZk3tkHnipzrG29LeWefU/OiotJgjt2mkiBYjIz8quUkivsitnYrG4kuc5/CP6mrefYHkDfrIiH0oIj/Oqn3HO6MaJ0q2f2Co1iTiFFHQREn3PqpJOwrgtXQoUKUY4f9p34tN//N/6VXbiK82aftlOd3MfKu//AGqZxFc6Pk4BjlyP3VVrjO/XBQuAwXH0FYcyuZ1deVYhp0hGn1WW5LhIkPxN0FPmo3qQx7Lc42jGfxMf6VHdMkaK1ULF5m45PLoTSibMQL7nkl7DqQauh1RiyyuQLqQ3CrJcStGozyB6ntWEQbVeY7YD1XuaImZY1Mlw/mPkYQHpWjCW+k8yV2SEgEA8ifrUSsqfIasrXUvlW4KRLgUdHDbW8QCMwfGA1aLsijEUbNgdPb863iLFdkbJu/E57DvirYxFbDFHl4bG+b+x2X60qjiTYZbpxvI5cqKjjEKodxcEZ5+9GxxySyfeZthUdFX275/hToDCVMl02+VVEKtyyOZxRNxKxlRIBiMtz+dG3cjSv5CKEjXogHNqLcJFG3ry56sPw/SmoWxljYfeZgQBlz0oXq70Rc49VIYJQbqfBz+1Pelskg5Ofi6g/MVXNDpipUttOjBOPNYHIPVfr86La+kudsZyQ56Hq3zPypmnmku5sBnyT2PWnDTjHEqyythwPUcdKrToZ8jzaRxWxWRyzOvxZPSkGsXbyrsQDn1P9a0u7r7xGEQFcnOT+IfM0mlOMVanYj4CkUx885c/xq1f2C1kVuJdw/5X/wDVVTZ+fPrVqvsEzmZuJv7vlH+dSwWWsoUKFEJW77ZV191k0T5xyf0qpzK+q35dyBFGfUSeQqx/285XF7wzEmRujmLH5ZFVyW2Ty0SR/KReo3Y31RKFuy9Zfb4oWLImDFbKyKPiYjp+VJLq6jg3Lbtuk7tjnRV9ftJGbey79SOlEELbZdOcoILMemaiRX5B9rbsWe4vCSWxtSlCF25vyXu3cUlMjCDzGYgHnt6kmtopfMlTzCy4bkCMCrEhfIUMZ5G2WqYi7kn1H60ojdLdNyuHlPRFrQTHbssyrSIRk7eQo9FjtR5jftJv51YkK2KggU/errcXC5AA/hRjSvKu/GASSFz6QPnSa3EjO7TOSegU9F+R96xf3LQqBE4UdMbckmikBsSzT7fhOAPxdzQs4Li8n38ynTn3+f0+dbafZy3LmR1wRzz2x70t1O/SztTBbYZW6knBkH+FNQqZCNSIg4gnj3DbuwcHvSw/tICo6jmKZ9Ylea7Zz2PKnPTJRNCGzzHWkkPZoqLAxk2bcjGa0iaW6OI1JQ9ST1+tOskQC8+YPypRbywQoNqhT3qtocQImxcbicDuaLkyTSp2hVGkkYKq9ycUxX+sIFK2frP9oimihQy49LMzOFA9zVqP9HxKkkvFKo2eUOfl1qm1xLNM26WQtmrf/wCjnBH618+0I/nTNCsuJihWKFANldvtccEcRcV6hoc+g6XLfi1ikDiPqpPQ1X+bwf8AE66nCPwreCMdMjrXoSOtA9aVoN0eeh8GfEuJSkfCd16uwA60P9SniYV3TcK3Rckk5I5V6GUKCQbPPhPBXxKlXdJwzd5+YU0D4KeJkmxV4Xu0UHmz4JI9q9B6FMgFCk8IPESyhAg4Yum58+n76zF4OeImAX4aug2cknHOr6Vg9aawMomfCHxEGAOG7ojsNoOKLh8F/EKaQSXOgzg9/ZRV8KFSwFHL/wAKvEWGA29rwvc+XnkFHxfM1H5fBvxMuZNkvDV2pzyJFegfahRsFUedOt+BHiY0+YOGruUdyRikmmeCPitbXAb9UL1kPUchXpCKApRqPPpfBfxOcYPC95gfKiZfBXxPyNnC958+VehlClGTPNW88DPFqeQrJwpelR0HaiP9QfiqOnCV5+6vTGhTAfJ5qR+A3imqAfqfeGrM/Yu4F4o4LXXjxHo82nm5EYjD/ixVku9D3qEBQoUKhD//2Q==" style="max-width:100%;max-height:160px;display:block;object-fit:contain" alt="EMG sensor on arm — home deployment"/>
                 </div>
-                <div class="chart-caption" style="text-align:center">EMG sensor on leg muscles — home deployment<br/><span style="color:var(--ink-3);font-size:0.72rem">Developed in collaboration with Rogers's group</span></div>
+                <div class="chart-caption" style="text-align:center">EMG sensor on arm — home deployment<br/><span style="color:var(--ink-3);font-size:0.72rem">Developed in collaboration with Rogers's group</span></div>
               </div>
             </div>
           </div>
@@ -784,6 +788,83 @@ footer span{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:rgba(
           <div style="font-weight:600;font-size:0.9rem;margin-bottom:5px">Context — Early-career embedded systems &amp; signal processing project</div>
           <p style="font-size:0.83rem;color:var(--ink-3);line-height:1.65">This project preceded my transition into neural engineering and represents my early foundation in embedded systems, real-time signal processing, and multi-sensor IoT architecture. The core skills developed here — adaptive thresholding, sensor fusion, real-time embedded firmware, and LabVIEW data acquisition — directly informed the hardware and signal processing methods used in subsequent neural engineering work.</p>
         </div>
+      </div>
+    </div>
+
+
+    <!-- ═══ NEWS & RECOGNITION ═══ -->
+    <div class="proj-panel" id="panel-news">
+      <div class="panel-header" data-r>
+        <div>
+          <span class="section-label">Media Coverage · Awards · Recognition</span>
+          <div class="panel-title">News & <em>Recognition</em></div>
+        </div>
+        <span class="badge" style="background:#FEE2E2;color:#DC2626;padding:5px 12px;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:0.68rem">● Latest Updates</span>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:16px" data-r>
+
+        <!-- Northwestern News -->
+        <a href="https://news.northwestern.edu/stories/2026/06/video-game-stroke-rehab-restores-arm-movement-in-chronic-stroke-survivors" target="_blank" style="text-decoration:none;color:inherit">
+          <div style="background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:border-color .2s,transform .2s;display:flex;gap:20px;align-items:flex-start" onmouseover="this.style.borderColor='var(--blue)';this.style.transform='translateX(4px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='translateX(0)'">
+            <div style="width:48px;height:48px;border-radius:10px;background:#4E2A84;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.3rem">🏛️</div>
+            <div style="flex:1">
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;flex-wrap:wrap">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:0.68rem;font-weight:600;color:#4E2A84;text-transform:uppercase;letter-spacing:.06em">Northwestern News</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--ink-3)">June 2026</span>
+              </div>
+              <div style="font-weight:600;font-size:0.95rem;color:var(--ink);margin-bottom:6px;line-height:1.35">Video game stroke rehab restores arm movement in chronic stroke survivors</div>
+              <p style="font-size:0.85rem;color:var(--ink-3);line-height:1.65;margin-bottom:10px">Northwestern's official news coverage of the MINT randomized controlled trial (n=59). Reports 7.8× better arm recovery vs. sham, 76% reduction in abnormal co-activation, and 315 reps/day in chronic stroke patients through a gamified home-based EMG therapy.</p>
+              <span style="font-size:0.78rem;color:var(--blue);font-weight:500">news.northwestern.edu →</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- WGN TV -->
+        <a href="https://wgntv.com/video/video-games-show-promise-in-stroke-recovery/11868088/" target="_blank" style="text-decoration:none;color:inherit">
+          <div style="background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:border-color .2s,transform .2s;display:flex;gap:20px;align-items:flex-start" onmouseover="this.style.borderColor='var(--blue)';this.style.transform='translateX(4px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='translateX(0)'">
+            <div style="width:48px;height:48px;border-radius:10px;background:#1a56db;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.3rem">📺</div>
+            <div style="flex:1">
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;flex-wrap:wrap">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:0.68rem;font-weight:600;color:#1a56db;text-transform:uppercase;letter-spacing:.06em">WGN TV — Chicago</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--ink-3)">June 2026</span>
+              </div>
+              <div style="font-weight:600;font-size:0.95rem;color:var(--ink);margin-bottom:6px;line-height:1.35">Video games show promise in stroke recovery</div>
+              <p style="font-size:0.85rem;color:var(--ink-3);line-height:1.65;margin-bottom:10px">Chicago's WGN television coverage of the MINT arm recovery trial. Features patient stories and clinical outcomes from the home-based gamified rehabilitation system for chronic stroke survivors.</p>
+              <span style="font-size:0.78rem;color:var(--blue);font-weight:500">wgntv.com →</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- US News -->
+        <a href="https://www.usnews.com/news/health-news/articles/2026-06-10/retro-video-game-aids-stroke-recovery-improves-arm-function" target="_blank" style="text-decoration:none;color:inherit">
+          <div style="background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:border-color .2s,transform .2s;display:flex;gap:20px;align-items:flex-start" onmouseover="this.style.borderColor='var(--blue)';this.style.transform='translateX(4px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='translateX(0)'">
+            <div style="width:48px;height:48px;border-radius:10px;background:#1c4f82;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.3rem">📰</div>
+            <div style="flex:1">
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;flex-wrap:wrap">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:0.68rem;font-weight:600;color:#1c4f82;text-transform:uppercase;letter-spacing:.06em">U.S. News &amp; World Report</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--ink-3)">June 10, 2026</span>
+              </div>
+              <div style="font-weight:600;font-size:0.95rem;color:var(--ink);margin-bottom:6px;line-height:1.35">Retro video game aids stroke recovery, improves arm function</div>
+              <p style="font-size:0.85rem;color:var(--ink-3);line-height:1.65;margin-bottom:10px">National health news coverage of the MINT trial results. Reports on how a gamified EMG-based therapy system delivered significant arm function improvements in chronic stroke survivors through unsupervised home use.</p>
+              <span style="font-size:0.78rem;color:var(--blue);font-weight:500">usnews.com →</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Nucleate Activator -->
+        <div style="background:linear-gradient(135deg,#F0FDF4,#DCFCE7);border:1.5px solid #86EFAC;border-radius:var(--radius);padding:24px;display:flex;gap:20px;align-items:flex-start">
+          <div style="width:48px;height:48px;border-radius:10px;background:#16A34A;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.3rem">🏆</div>
+          <div style="flex:1">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;flex-wrap:wrap">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:0.68rem;font-weight:600;color:#15803D;text-transform:uppercase;letter-spacing:.06em">Award · Finalist</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--ink-3)">2026</span>
+            </div>
+            <div style="font-weight:600;font-size:0.95rem;color:var(--ink);margin-bottom:6px;line-height:1.35">MINT selected as Finalist — 2026 Nucleate Activator Chicago Cohort</div>
+            <p style="font-size:0.85rem;color:#15803D;line-height:1.65">MINT (Myoelectric Interface for Neurorehabilitation) has been selected as a finalist for the 2026 Nucleate Activator Chicago cohort — a competitive program supporting the translation of breakthrough life science and biotech innovations from academia into impactful startups.</p>
+          </div>
+        </div>
+
       </div>
     </div>
 
