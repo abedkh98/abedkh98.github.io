@@ -315,9 +315,9 @@ footer span{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:rgba(
 
 <!-- HERO -->
 <section class="hero" id="top">
-  <div class="hero-eyebrow"><span class="dot-live"></span>Research Assistant Professor · Northwestern University</div>
+  <div class="hero-eyebrow"><span class="dot-live"></span>Biomedical Engineer · Northwestern University</div>
   <h1>Building technology<br/>that <em>heals the nervous system.</em></h1>
-  <p class="hero-sub">Neural engineer at Northwestern. I design wearable biosensors, closed-loop neuromodulation systems, and AI models that give stroke survivors their arms back.</p>
+  <p class="hero-sub">Neural engineer and biomedical researcher at Northwestern. I design wearable biosensors, closed-loop neuromodulation systems, and AI models that restore movement in people with neurological disorders — and run experiments to uncover how the brain encodes movement, how injury disrupts it, and how technology can bring it back.</p>
   <div class="hero-btns">
     <a href="#projects" class="btn-primary">See my projects</a>
     <a href="#contact" class="btn-ghost">Get in touch</a>
@@ -477,8 +477,6 @@ footer span{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:rgba(
               <div style="font-weight:600;font-size:0.9rem">Wearable EMG + IMU</div>
               <span style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;padding:2px 7px;background:var(--blue-light);color:var(--blue);border-radius:4px">Stroke Rehab</span>
             </div>
-            <div class="hw-bullet">ADS1299 bioamplifier · biopotential sensing circuit</div>
-            <div class="hw-bullet">ATmega328 MCU · SPI streaming · BLE wireless</div>
             <div class="hw-bullet">Flexible PCB (Altium) · week-long wear · waterproof</div>
             <div class="hw-bullet">Validated: 11 subjects (5 healthy, 6 stroke) · 21 iterations</div>
           </div>
@@ -505,13 +503,9 @@ footer span{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:rgba(
             <div class="hw-bullet">Programmable all stim parameters · direction control GUI</div>
           </div>
           <div class="tags" style="margin-top:16px">
-            <span class="tag">ADS1299</span><span class="tag">ATmega328</span><span class="tag">Altium · Eagle</span>
+            <span class="tag">Altium · Eagle</span>
             <span class="tag">PSpice · Proteus</span><span class="tag">LabVIEW SPI</span>
             <span class="tag">Biphasic stim</span><span class="tag">H-bridge</span><span class="tag">BLE</span>
-          </div>
-          <div style="margin-top:14px;background:var(--bg-alt);border-radius:9px;padding:12px">
-            <canvas id="sensorCanvas" height="80" style="width:100%;border-radius:6px"></canvas>
-            <div class="chart-caption">// Wireless EMG CH1–3 + IMU · BLE connected · live signal</div>
           </div>
         </div>
         <!-- Right: video + hardware photos -->
@@ -778,24 +772,7 @@ footer span{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:rgba(
             <div class="chart-caption" style="margin-top:8px">Main screen: left column shows status LEDs (green=OK, red=fault) for all 8 subsystems. Tabs for axle temperature, wheel flat, brake, transformer, charger. Live gauges for voltage, current, pressure, and temperature.</div>
           </div>
 
-          <!-- Animated wheel flat chart -->
-          <div class="card">
-            <span class="card-label">Wheel Flat Detection — Signal Analysis</span>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
-              <div style="background:var(--bg-alt);border-radius:9px;padding:12px;border-left:3px solid var(--blue)">
-                <div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--blue);margin-bottom:6px;letter-spacing:.04em;text-transform:uppercase">Autocorrelation</div>
-                <div style="font-size:0.78rem;color:var(--ink-3);line-height:1.5">Shape-agnostic pattern detection. GPS + accelerometer data fusion. Robust to noise.</div>
-              </div>
-              <div style="background:var(--bg-alt);border-radius:9px;padding:12px;border-left:3px solid #8B5CF6">
-                <div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:#7C3AED;margin-bottom:6px;letter-spacing:.04em;text-transform:uppercase">Virtual Mass-Spring</div>
-                <div style="font-size:0.78rem;color:var(--ink-3);line-height:1.5">3 parallel resonators track wheel speed. Amplitude ∝ flat severity. Low memory, real-time.</div>
-              </div>
-            </div>
-            <div style="background:var(--bg-alt);border-radius:9px;padding:12px">
-              <canvas id="trainCanvas" height="100" style="width:100%;border-radius:6px"></canvas>
-              <div class="chart-caption">// Axle accelerometer · periodic impulse from wheel flat · resonator response amplitude</div>
-            </div>
-          </div>
+
 
         </div>
       </div>
@@ -953,19 +930,18 @@ function setupCanvas(c,H){
   if(!c)return;
   function draw(){
     const s=setupCanvas(c,200); const {ctx,W,H}=s;
-    const pad={l:68,r:24,t:28,b:46};
+    const pad={l:44,r:20,t:36,b:46};
     const cW=W-pad.l-pad.r,cH=H-pad.t-pad.b,maxV=10;
-    // Y axis label
-    ctx.save(); ctx.translate(14,pad.t+cH/2); ctx.rotate(-Math.PI/2);
-    ctx.font='12px Inter,sans-serif'; ctx.fillStyle='rgba(55,65,81,.9)'; ctx.textAlign='center';
-    ctx.fillText('Δ WMFT time / task (s)',0,0); ctx.restore();
-    // Grid + tick labels
+    // Title above chart (readable, no rotation needed)
+    ctx.font='bold 12px Inter,sans-serif'; ctx.fillStyle='rgba(55,65,81,.9)'; ctx.textAlign='left';
+    ctx.fillText('↑ Higher is better  (Δ WMFT time/task, s)',pad.l,18);
+    // Grid + tick labels — just numbers, unit shown in title
     [0,2,4,6,8,10].forEach(v=>{
       const y=pad.t+cH-(v/maxV)*cH;
       ctx.strokeStyle='rgba(229,231,235,1)'; ctx.lineWidth=1;
       ctx.beginPath(); ctx.moveTo(pad.l,y); ctx.lineTo(pad.l+cW,y); ctx.stroke();
       ctx.font='12px Inter,sans-serif'; ctx.fillStyle='rgba(75,85,99,.9)';
-      ctx.textAlign='right'; ctx.fillText(v,pad.l-8,y+4);
+      ctx.textAlign='right'; ctx.fillText(v,pad.l-5,y+4);
     });
     // Bars: Sham=1.1s, MINT=8.6s
     const bW=cW*0.22,gap=cW*0.16,startX=pad.l+cW*0.14;
@@ -990,39 +966,9 @@ function setupCanvas(c,H){
     ctx.beginPath(); ctx.moveTo(pad.l,mY); ctx.lineTo(pad.l+cW,mY); ctx.stroke(); ctx.setLineDash([]);
     ctx.font='12px Inter,sans-serif'; ctx.fillStyle='rgba(180,120,0,1)'; ctx.textAlign='right';
     ctx.fillText('MCID',pad.l+cW,mY-6);
-    // Higher is better arrow
-    ctx.save(); ctx.translate(pad.l-54,pad.t+cH*.42); ctx.rotate(-Math.PI/2);
-    ctx.font='12px Inter,sans-serif'; ctx.fillStyle='rgba(55,65,81,.8)'; ctx.textAlign='center';
-    ctx.fillText('↑ Higher is better',0,0); ctx.restore();
   }
   const obs=new IntersectionObserver(e=>{ if(e[0].isIntersecting)draw(); });
   obs.observe(c); window.addEventListener('resize',draw); draw();
-})();
-
-// ── Sensor canvas ──
-(function(){
-  const c=document.getElementById('sensorCanvas');
-  if(!c)return;
-  let t=0,af,ctx,W,H;
-  function init(){ const s=setupCanvas(c,80); ctx=s.ctx; W=s.W; H=s.H; }
-  function draw(){
-    if(!ctx)return;
-    ctx.clearRect(0,0,W,H); ctx.fillStyle='#F8FAFF'; ctx.fillRect(0,0,W,H);
-    [[H*.18,'rgba(37,99,235,',2.1,0,'EMG·CH1'],[H*.42,'rgba(37,99,235,',3.1,1.0,'EMG·CH2'],[H*.65,'rgba(37,99,235,',2.6,2.1,'EMG·CH3'],[H*.88,'rgba(16,185,129,',0.8,0.5,'IMU·AX']].forEach(([y,col,f,ph,lbl])=>{
-      ctx.beginPath();
-      for(let x=0;x<=W-12;x++){
-        const nx=x/(W-12),s=(Math.sin(nx*10*f+t+ph)+.2*Math.sin(nx*22*f+t*2)+.05*(Math.random()-.5))*9;
-        x===0?ctx.moveTo(8+x,y+s):ctx.lineTo(8+x,y+s);
-      }
-      ctx.strokeStyle=col+'.6)'; ctx.lineWidth=1.2; ctx.stroke();
-      ctx.font='8px Inter,sans-serif'; ctx.fillStyle=col+'.55)'; ctx.fillText(lbl,4,y-3);
-    });
-    ctx.font='8px Inter,sans-serif'; ctx.fillStyle='rgba(22,163,74,.7)'; ctx.textAlign='right';
-    ctx.fillText('● BLE · '+(98+Math.round(Math.sin(t*.5)))+'%',W-4,10); ctx.textAlign='left';
-    t+=.018; af=requestAnimationFrame(draw);
-  }
-  const obs=new IntersectionObserver(e=>{ if(e[0].isIntersecting){ init(); if(!af)draw(); }else{ cancelAnimationFrame(af); af=null; } });
-  obs.observe(c); window.addEventListener('resize',()=>init());
 })();
 
 // ── BSI canvas ──
@@ -1030,33 +976,34 @@ function setupCanvas(c,H){
   const c=document.getElementById('bsiCanvas');
   if(!c)return;
   let t=0,af,ctx,W,H;
-  function init(){ const s=setupCanvas(c,80); ctx=s.ctx; W=s.W; H=s.H; }
+  function init(){ const s=setupCanvas(c,110); ctx=s.ctx; W=s.W; H=s.H; }
   function draw(){
     if(!ctx)return;
     ctx.clearRect(0,0,W,H); ctx.fillStyle='#F8FAFF'; ctx.fillRect(0,0,W,H);
     const nodes=[{x:W*.1,y:H*.5,l:'CORTEX',s:'LFP'},{x:W*.37,y:H*.5,l:'DECODE',s:'<1ms',hi:true},{x:W*.63,y:H*.5,l:'STIM',s:'epidural'},{x:W*.9,y:H*.5,l:'SPINAL',s:'motor'}];
-    const r=Math.min(W*.07,22);
+    const r=Math.min(W*.09,30);
     for(let i=0;i<nodes.length-1;i++){
       const a=nodes[i],b=nodes[i+1];
       ctx.beginPath(); ctx.moveTo(a.x+r,a.y); ctx.lineTo(b.x-r,b.y);
-      ctx.strokeStyle='rgba(37,99,235,.2)'; ctx.lineWidth=1.5; ctx.stroke();
+      ctx.strokeStyle='rgba(37,99,235,.25)'; ctx.lineWidth=2; ctx.stroke();
       const ax=b.x-r,ay=b.y;
-      ctx.beginPath(); ctx.moveTo(ax,ay); ctx.lineTo(ax-6,ay-3); ctx.lineTo(ax-6,ay+3);
-      ctx.closePath(); ctx.fillStyle='rgba(37,99,235,.2)'; ctx.fill();
+      ctx.beginPath(); ctx.moveTo(ax,ay); ctx.lineTo(ax-8,ay-4); ctx.lineTo(ax-8,ay+4);
+      ctx.closePath(); ctx.fillStyle='rgba(37,99,235,.25)'; ctx.fill();
     }
     const sp=((t*50)%(W*.82))+W*.1;
-    ctx.beginPath(); ctx.arc(sp,H*.5,4,0,Math.PI*2); ctx.fillStyle='rgba(37,99,235,.8)'; ctx.fill();
+    ctx.beginPath(); ctx.arc(sp,H*.5,5,0,Math.PI*2); ctx.fillStyle='rgba(37,99,235,.85)'; ctx.fill();
+    ctx.beginPath(); ctx.arc(sp,H*.5,9,0,Math.PI*2); ctx.fillStyle='rgba(37,99,235,.18)'; ctx.fill();
     nodes.forEach(n=>{
       const pulse=n.hi?1+.06*Math.sin(t*5):1;
       ctx.beginPath(); ctx.arc(n.x,n.y,r*pulse,0,Math.PI*2);
       ctx.fillStyle='#fff'; ctx.fill();
-      ctx.strokeStyle=n.hi?'rgba(37,99,235,.7)':'rgba(229,231,235,1)';
-      ctx.lineWidth=n.hi?2:1.5; ctx.stroke();
-      ctx.font='bold 7px Inter,sans-serif'; ctx.textAlign='center';
-      ctx.fillStyle=n.hi?'rgba(37,99,235,.9)':'rgba(55,65,81,.8)';
-      ctx.fillText(n.l,n.x,n.y+2);
-      ctx.font='6px Inter,sans-serif'; ctx.fillStyle='rgba(107,114,128,.6)';
-      ctx.fillText(n.s,n.x,n.y+11);
+      ctx.strokeStyle=n.hi?'rgba(37,99,235,.75)':'rgba(209,213,219,1)';
+      ctx.lineWidth=n.hi?2.5:1.5; ctx.stroke();
+      ctx.font=`bold ${Math.max(10,r*0.42)}px Inter,sans-serif`; ctx.textAlign='center';
+      ctx.fillStyle=n.hi?'rgba(37,99,235,.95)':'rgba(55,65,81,.85)';
+      ctx.fillText(n.l,n.x,n.y+3);
+      ctx.font=`${Math.max(9,r*0.35)}px Inter,sans-serif`; ctx.fillStyle='rgba(107,114,128,.7)';
+      ctx.fillText(n.s,n.x,n.y+r*0.72);
     }); ctx.textAlign='left';
     t+=.018; af=requestAnimationFrame(draw);
   }
@@ -1069,47 +1016,49 @@ function setupCanvas(c,H){
   const c=document.getElementById('bcsiChart');
   if(!c)return;
   function draw(){
-    const s=setupCanvas(c,180); const {ctx,W,H}=s;
-    const pad={l:58,r:20,t:24,b:40},cW=W-pad.l-pad.r,cH=H-pad.t-pad.b;
+    const s=setupCanvas(c,220); const {ctx,W,H}=s;
+    const pad={l:52,r:20,t:36,b:46},cW=W-pad.l-pad.r,cH=H-pad.t-pad.b;
     const minY=10,maxY=70,yR=60;
     function toY(v){return pad.t+cH-(v-minY)/yR*cH;}
-    ctx.save(); ctx.translate(13,pad.t+cH/2); ctx.rotate(-Math.PI/2);
-    ctx.font='10px Inter,sans-serif'; ctx.fillStyle='rgba(55,65,81,.85)'; ctx.textAlign='center';
-    ctx.fillText('Normalized Lever Press Range (%)',0,0); ctx.restore();
+    // Y axis label — placed as readable left-side text, not rotated ambiguously
+    ctx.save(); ctx.translate(11,pad.t+cH/2); ctx.rotate(-Math.PI/2);
+    ctx.font='bold 12px Inter,sans-serif'; ctx.fillStyle='rgba(55,65,81,.9)'; ctx.textAlign='center';
+    ctx.fillText('Lever Press Range (%)',0,0); ctx.restore();
+    // Tick values
     [10,20,30,40,50,60,70].forEach(v=>{
       const y=toY(v);
       ctx.strokeStyle='rgba(229,231,235,1)'; ctx.lineWidth=1;
       ctx.beginPath(); ctx.moveTo(pad.l,y); ctx.lineTo(pad.l+cW,y); ctx.stroke();
-      ctx.font='11px Inter,sans-serif'; ctx.fillStyle='rgba(75,85,99,.85)';
-      ctx.textAlign='right'; ctx.fillText(v,pad.l-7,y+4);
+      ctx.font='12px Inter,sans-serif'; ctx.fillStyle='rgba(75,85,99,.9)';
+      ctx.textAlign='right'; ctx.fillText(v,pad.l-6,y+4);
     });
     const cX=pad.l+cW*.28,bX=pad.l+cW*.72,bW=cW*.18;
     [[cX,21,'rgba(180,190,210,.85)','Catch Trial'],[bX,39,'rgba(37,99,235,.85)','BCSI On']].forEach(([x,mean,col,lbl])=>{
       const bH=toY(minY)-toY(mean);
       ctx.fillStyle=col; ctx.beginPath(); ctx.roundRect(x-bW/2,toY(mean),bW,bH,3); ctx.fill();
       const se=x===cX?2.5:2.8;
-      ctx.strokeStyle='rgba(55,65,81,.7)'; ctx.lineWidth=1.5;
+      ctx.strokeStyle='rgba(55,65,81,.7)'; ctx.lineWidth=1.8;
       ctx.beginPath(); ctx.moveTo(x,toY(mean+se)); ctx.lineTo(x,toY(mean-se)); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(x-5,toY(mean+se)); ctx.lineTo(x+5,toY(mean+se)); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(x-5,toY(mean-se)); ctx.lineTo(x+5,toY(mean-se)); ctx.stroke();
-      ctx.font='12px Inter,sans-serif'; ctx.fillStyle='rgba(55,65,81,.9)'; ctx.textAlign='center';
-      ctx.fillText(lbl,x,pad.t+cH+22);
+      ctx.beginPath(); ctx.moveTo(x-6,toY(mean+se)); ctx.lineTo(x+6,toY(mean+se)); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(x-6,toY(mean-se)); ctx.lineTo(x+6,toY(mean-se)); ctx.stroke();
+      ctx.font='13px Inter,sans-serif'; ctx.fillStyle='rgba(55,65,81,.9)'; ctx.textAlign='center';
+      ctx.fillText(lbl,x,pad.t+cH+24);
     });
     [{catch:32,bcsi:60,col:'#F59E0B'},{catch:31,bcsi:40,col:'#60A5FA'},{catch:21,bcsi:38,col:'#F87171'},{catch:20,bcsi:36,col:'#34D399'}].forEach(s=>{
-      ctx.strokeStyle=s.col; ctx.lineWidth=1.5; ctx.fillStyle='#fff';
-      ctx.beginPath(); ctx.arc(cX,toY(s.catch),4,0,Math.PI*2); ctx.fill(); ctx.stroke();
-      ctx.beginPath(); ctx.arc(bX,toY(s.bcsi),4,0,Math.PI*2); ctx.fill(); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(cX+4,toY(s.catch)); ctx.lineTo(bX-4,toY(s.bcsi));
-      ctx.strokeStyle=s.col; ctx.lineWidth=1.2; ctx.setLineDash([3,3]); ctx.stroke(); ctx.setLineDash([]);
+      ctx.strokeStyle=s.col; ctx.lineWidth=1.8; ctx.fillStyle='#fff';
+      ctx.beginPath(); ctx.arc(cX,toY(s.catch),5,0,Math.PI*2); ctx.fill(); ctx.stroke();
+      ctx.beginPath(); ctx.arc(bX,toY(s.bcsi),5,0,Math.PI*2); ctx.fill(); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cX+5,toY(s.catch)); ctx.lineTo(bX-5,toY(s.bcsi));
+      ctx.strokeStyle=s.col; ctx.lineWidth=1.3; ctx.setLineDash([3,3]); ctx.stroke(); ctx.setLineDash([]);
     });
-    const sigY=toY(39+2.8)-12;
-    ctx.strokeStyle='rgba(37,99,235,.6)'; ctx.lineWidth=1.3;
+    const sigY=toY(39+2.8)-14;
+    ctx.strokeStyle='rgba(37,99,235,.65)'; ctx.lineWidth=1.5;
     ctx.beginPath(); ctx.moveTo(cX,sigY); ctx.lineTo(cX,sigY-4); ctx.lineTo(bX,sigY-4); ctx.lineTo(bX,sigY); ctx.stroke();
-    ctx.font='bold 14px sans-serif'; ctx.fillStyle='rgba(37,99,235,.85)'; ctx.textAlign='center';
+    ctx.font='bold 16px sans-serif'; ctx.fillStyle='rgba(37,99,235,.9)'; ctx.textAlign='center';
     ctx.fillText('**',(cX+bX)/2,sigY-5);
-    ctx.save(); ctx.translate(pad.l-44,pad.t+cH*.4); ctx.rotate(-Math.PI/2);
-    ctx.font='11px Inter,sans-serif'; ctx.fillStyle='rgba(107,114,128,.7)'; ctx.textAlign='center';
-    ctx.fillText('↑ Better',0,0); ctx.restore();
+    // "↑ Better" as a clear upward label next to y-axis
+    ctx.font='12px Inter,sans-serif'; ctx.fillStyle='rgba(55,65,81,.7)'; ctx.textAlign='left';
+    ctx.fillText('↑ Better',pad.l+4,pad.t-8);
   }
   const obs=new IntersectionObserver(e=>{ if(e[0].isIntersecting)draw(); });
   obs.observe(c); window.addEventListener('resize',draw); draw();
