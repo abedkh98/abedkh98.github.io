@@ -515,44 +515,55 @@ footer span{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:rgba(2
       </div>
     </div>
 
-    <!-- Two-col: mechanism + results -->
+    <!-- Two-col: left=mechanism, right=video+results -->
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:24px" data-r>
 
-      <!-- How MINT works -->
-      <div style="background:var(--bg-alt);border:1px solid var(--border);border-radius:var(--radius);padding:28px">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:0.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:18px">How MINT Works</div>
-        <div style="display:flex;flex-direction:column;gap:16px">
-          <div style="display:flex;gap:14px;align-items:flex-start">
-            <div style="width:24px;height:24px;border-radius:50%;background:var(--blue);color:#fff;font-size:0.72rem;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px">1</div>
-            <p style="font-size:0.875rem;color:var(--ink-2);line-height:1.6">After stroke, muscles co-activate abnormally — for example biceps &amp; deltoid fire together, preventing straight reaching.</p>
+      <!-- LEFT: How MINT works -->
+      <div style="background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:28px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:18px">How MINT Works</div>
+        <div style="display:flex;flex-direction:column;gap:0">
+          <div style="padding-bottom:16px;border-left:2px solid var(--blue-mid);margin-left:10px;padding-left:18px;position:relative">
+            <div style="position:absolute;left:-7px;top:2px;width:12px;height:12px;border-radius:50%;background:var(--blue)"></div>
+            <div style="font-weight:600;font-size:0.9rem;margin-bottom:3px">Abnormal Co-activation</div>
+            <div style="font-size:0.85rem;color:var(--ink-3);line-height:1.6">After stroke, muscles co-activate abnormally — biceps &amp; deltoid fire together, preventing straight reaching. Most clinicians consider this permanent.</div>
           </div>
-          <div style="display:flex;gap:14px;align-items:flex-start">
-            <div style="width:24px;height:24px;border-radius:50%;background:var(--blue);color:#fff;font-size:0.72rem;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px">2</div>
-            <p style="font-size:0.875rem;color:var(--ink-2);line-height:1.6">EMG sensors map each muscle to a perpendicular cursor direction — co-activation appears as diagonal movement on screen.</p>
+          <div style="padding-bottom:16px;border-left:2px solid var(--blue-mid);margin-left:10px;padding-left:18px;position:relative">
+            <div style="position:absolute;left:-7px;top:2px;width:12px;height:12px;border-radius:50%;background:var(--blue)"></div>
+            <div style="font-weight:600;font-size:0.9rem;margin-bottom:3px">EMG Cursor Mapping</div>
+            <div style="font-size:0.85rem;color:var(--ink-3);line-height:1.6">Surface EMG sensors map each muscle to a perpendicular cursor direction — co-activation appears as diagonal movement on screen, made visible in real time.</div>
           </div>
-          <div style="display:flex;gap:14px;align-items:flex-start">
-            <div style="width:24px;height:24px;border-radius:50%;background:var(--blue);color:#fff;font-size:0.72rem;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px">3</div>
-            <p style="font-size:0.875rem;color:var(--ink-2);line-height:1.6">Patients play a retro video game at home — hitting off-diagonal targets trains muscles to decouple through operant conditioning.</p>
+          <div style="padding-bottom:16px;border-left:2px solid var(--blue-mid);margin-left:10px;padding-left:18px;position:relative">
+            <div style="position:absolute;left:-7px;top:2px;width:12px;height:12px;border-radius:50%;background:var(--blue)"></div>
+            <div style="font-weight:600;font-size:0.9rem;margin-bottom:3px">Gamified Home Therapy</div>
+            <div style="font-size:0.85rem;color:var(--ink-3);line-height:1.6">Patients play a retro video game at home — hitting off-diagonal targets trains muscles to decouple through operant conditioning, 315 reps/day unsupervised.</div>
           </div>
-          <div style="display:flex;gap:14px;align-items:flex-start">
-            <div style="width:24px;height:24px;border-radius:50%;background:var(--blue);color:#fff;font-size:0.72rem;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px">4</div>
-            <p style="font-size:0.875rem;color:var(--ink-2);line-height:1.6">The 3-muscle group (experimental) showed the strongest decoupling and functional recovery results.</p>
+          <div style="margin-left:10px;padding-left:18px;position:relative">
+            <div style="position:absolute;left:-7px;top:2px;width:12px;height:12px;border-radius:50%;background:#22C55E"></div>
+            <div style="font-weight:600;font-size:0.9rem;margin-bottom:3px;color:#16A34A">Functional Recovery</div>
+            <div style="font-size:0.85rem;color:var(--ink-3);line-height:1.6">The 3-muscle group (experimental) showed strongest results: 7.8× better arm recovery vs. sham, 76% reduction in abnormal co-activation (n=59 RCT).</div>
           </div>
         </div>
-        <!-- EMG diagram -->
-        <div style="margin-top:20px;background:#fff;border-radius:10px;padding:14px">
-          <canvas id="mintCanvas" height="140" style="width:100%;border-radius:6px"></canvas>
-          <div style="font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:#9CA3AF;margin-top:6px">// Co-activating → Decoupled · Biceps + Anterior Deltoid</div>
+        <!-- Tags -->
+        <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:20px">
+          <span class="feat-tag">Delsys Trigno EMG</span>
+          <span class="feat-tag">Python · MATLAB</span>
+          <span class="feat-tag">Gamified UX</span>
+          <span class="feat-tag">Wearable IMU</span>
+          <span class="feat-tag">Home deployment</span>
         </div>
-      </div>
+        <!-- EMG animated diagram -->
+        <div style="margin-top:20px;background:var(--bg-alt);border-radius:10px;padding:12px">
+          <canvas id="mintCanvas" height="100" style="width:100%;border-radius:6px"></canvas>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:#9CA3AF;margin-top:6px">// Co-activating → Decoupled · Biceps + Anterior Deltoid</div>
+        </div>
       </div>
 
-      <!-- Right column: video top + results bottom -->
+      <!-- RIGHT: video top + results bottom -->
       <div style="display:flex;flex-direction:column;gap:16px">
 
         <!-- Video panel -->
-        <div style="background:var(--bg-alt);border:1px solid var(--border);border-radius:var(--radius);padding:20px">
-          <div style="font-family:'JetBrains Mono',monospace;font-size:0.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:12px">Patient — Before &amp; After MINT</div>
+        <div style="background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:20px">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:12px">Patient — Before &amp; After MINT</div>
           <div style="border-radius:10px;overflow:hidden;aspect-ratio:16/9;box-shadow:0 4px 16px rgba(0,0,0,0.1)">
             <iframe width="100%" height="100%"
               src="https://www.youtube.com/embed/Hbcf2UDwtjU?rel=0&modestbranding=1"
@@ -560,17 +571,17 @@ footer span{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:rgba(2
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen style="display:block"></iframe>
           </div>
-          <div style="font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:#9CA3AF;margin-top:8px">// Chronic stroke survivor · &gt;5 years post-stroke · 8-week home-based MINT therapy</div>
+          <div style="font-size:0.78rem;color:var(--ink-3);margin-top:8px">Chronic stroke survivor · &gt;5 years post-stroke · 8-week home-based MINT therapy</div>
         </div>
 
         <!-- Results panel -->
-        <div style="background:var(--bg-alt);border:1px solid var(--border);border-radius:var(--radius);padding:20px">
-          <div style="font-family:'JetBrains Mono',monospace;font-size:0.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:12px">Results — Wolf Motor Function Test</div>
-          <div style="background:#fff;border-radius:10px;padding:14px;margin-bottom:12px">
-            <canvas id="wmftChart" height="160" style="width:100%"></canvas>
-            <div style="font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:#9CA3AF;margin-top:6px">// Δ WMFT time/task (s) — lower is better · * p&lt;0.05 · MCID shown</div>
+        <div style="background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:20px;flex:1">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:12px">Results — Wolf Motor Function Test</div>
+          <div style="background:var(--bg-alt);border-radius:10px;padding:14px;margin-bottom:12px">
+            <canvas id="wmftChart" height="200" style="width:100%"></canvas>
+            <div style="font-size:0.78rem;color:var(--ink-3);margin-top:8px">Δ WMFT time/task (s) — lower is better · * p&lt;0.05 · MCID threshold shown</div>
           </div>
-          <p style="font-size:0.82rem;color:var(--ink-3);line-height:1.6">Reduced co-activation directly predicted better Wolf Motor Function Test scores. MINT group improved well above the MCID threshold; sham did not.</p>
+          <p style="font-size:0.85rem;color:var(--ink-3);line-height:1.65">Reduced co-activation directly predicted better Wolf Motor Function Test scores. MINT improved well above the MCID threshold; sham did not.</p>
         </div>
 
       </div>
@@ -1065,9 +1076,8 @@ function resize(canvas){
     ctx.clearRect(0,0,W,H);ctx.fillStyle='#fff';ctx.fillRect(0,0,W,H);
     const half=W/2-8;
     // BEFORE label
-    ctx.font='8px JetBrains Mono,monospace';ctx.fillStyle='rgba(107,114,128,.8)';ctx.fillText('CO-ACTIVATING',8,12);
-    // AFTER label
-    ctx.fillStyle='rgba(37,99,235,.8)';ctx.fillText('DECOUPLED',half+16,12);
+    ctx.font='8px JetBrains Mono,monospace';ctx.fillStyle='rgba(107,114,128,.8)';ctx.fillText('CO-ACTIVATING',8,14);
+    ctx.fillStyle='rgba(37,99,235,.8)';ctx.fillText('DECOUPLED',half+16,14);
     // Divider
     ctx.strokeStyle='rgba(229,231,235,1)';ctx.lineWidth=1;
     ctx.beginPath();ctx.moveTo(half+8,0);ctx.lineTo(half+8,H);ctx.stroke();
@@ -1089,8 +1099,8 @@ function resize(canvas){
       }
       ctx.strokeStyle=col+'.75)';ctx.lineWidth=1.3;ctx.stroke();
       // Label
-      ctx.font='7.5px JetBrains Mono,monospace';ctx.fillStyle=col+'.55)';
-      ctx.fillText(lbl,8,by-5);ctx.fillText(lbl,half+16,by-5);
+      ctx.font='9px Inter,sans-serif';ctx.fillStyle=col+'.65)';
+      ctx.fillText(lbl,8,by-6);ctx.fillText(lbl,half+16,by-6);
     });
     t+=.02;af=requestAnimationFrame(draw);
   }
@@ -1104,64 +1114,55 @@ function resize(canvas){
   if(!c)return;
   const ctx=c.getContext('2d');
   function draw(){
-    const W=c.offsetWidth||360,H=180;
+    const W=c.offsetWidth||360,H=200;
     if(c.width!==W*(devicePixelRatio||1)){c.width=W*(devicePixelRatio||1);c.height=H*(devicePixelRatio||1);ctx.scale(devicePixelRatio||1,devicePixelRatio||1);}
-    ctx.clearRect(0,0,W,H);ctx.fillStyle='#fff';ctx.fillRect(0,0,W,H);
-    const pad={l:44,r:20,t:24,b:36};
+    ctx.clearRect(0,0,W,H);ctx.fillStyle='#F8FAFF';ctx.fillRect(0,0,W,H);
+    const pad={l:58,r:24,t:28,b:44};
     const cW=W-pad.l-pad.r,cH=H-pad.t-pad.b;
+    const maxVal=12;
     // Y axis label
-    ctx.save();ctx.translate(12,pad.t+cH/2);ctx.rotate(-Math.PI/2);
-    ctx.font='8px JetBrains Mono,monospace';ctx.fillStyle='rgba(107,114,128,.8)';
-    ctx.textAlign='center';ctx.fillText('Δ WMFT time/task (s)',0,0);ctx.restore();
-    // Grid lines
-    const maxVal=12,steps=4;
-    ctx.strokeStyle='rgba(229,231,235,.8)';ctx.lineWidth=1;
-    for(let i=0;i<=steps;i++){
-      const y=pad.t+cH-(i/steps)*cH;
+    ctx.save();ctx.translate(13,pad.t+cH/2);ctx.rotate(-Math.PI/2);
+    ctx.font='11px Inter,sans-serif';ctx.fillStyle='rgba(55,65,81,.85)';
+    ctx.textAlign='center';ctx.fillText('Δ WMFT time / task (s)',0,0);ctx.restore();
+    // Grid + Y ticks
+    [0,3,6,9,12].forEach(v=>{
+      const y=pad.t+cH-(v/maxVal)*cH;
+      ctx.strokeStyle='rgba(229,231,235,1)';ctx.lineWidth=1;
       ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(pad.l+cW,y);ctx.stroke();
-      ctx.font='8px JetBrains Mono,monospace';ctx.fillStyle='rgba(107,114,128,.7)';
-      ctx.textAlign='right';ctx.fillText(Math.round(i/steps*maxVal),pad.l-5,y+3);
-    }
-    // Bars: Sham and MINT
-    const bars=[
-      {label:'Sham',val:1.2,col:'rgba(209,213,219,1)',hover:false},
-      {label:'MINT',val:9.8,col:'rgba(37,99,235,1)',hover:false},
-    ];
-    const bW=cW*.22,gap=cW*.18;
-    const startX=pad.l+cW*.18;
-    bars.forEach((b,i)=>{
-      const bH=(b.val/maxVal)*cH;
-      const x=startX+i*(bW+gap);
-      const y=pad.t+cH-bH;
-      // Bar
-      ctx.fillStyle=b.col;
-      ctx.beginPath();ctx.roundRect(x,y,bW,bH,4);ctx.fill();
-      // Value label on top
-      ctx.font='bold 9px JetBrains Mono,monospace';ctx.fillStyle=i===1?'rgba(37,99,235,.9)':'rgba(107,114,128,.8)';
-      ctx.textAlign='center';ctx.fillText(b.val.toFixed(1)+'s',x+bW/2,y-5);
-      // X label
-      ctx.font='9px JetBrains Mono,monospace';ctx.fillStyle='rgba(55,65,81,.8)';
-      ctx.fillText(b.label,x+bW/2,pad.t+cH+14);
+      ctx.font='11px Inter,sans-serif';ctx.fillStyle='rgba(75,85,99,.85)';
+      ctx.textAlign='right';ctx.fillText(v,pad.l-8,y+4);
     });
-    // Significance marker
-    const x0=startX+bW/2,x1=startX+bW+gap+bW/2;
-    const sigY=pad.t+8;
-    ctx.strokeStyle='rgba(37,99,235,.5)';ctx.lineWidth=1.2;
-    ctx.beginPath();ctx.moveTo(x0,sigY);ctx.lineTo(x0,sigY-3);ctx.lineTo(x1,sigY-3);ctx.lineTo(x1,sigY);ctx.stroke();
-    ctx.font='11px sans-serif';ctx.fillStyle='rgba(37,99,235,.8)';ctx.textAlign='center';ctx.fillText('*',( x0+x1)/2,sigY-5);
+    // Bars
+    const bW=cW*0.22,gap=cW*0.16;
+    const startX=pad.l+cW*0.14;
+    [{label:'Sham',val:1.2,col:'rgba(209,213,219,1)'},{label:'MINT',val:9.8,col:'rgba(37,99,235,0.85)'}].forEach((b,i)=>{
+      const bH=(b.val/maxVal)*cH,x=startX+i*(bW+gap),y=pad.t+cH-bH;
+      ctx.fillStyle=b.col;ctx.beginPath();ctx.roundRect(x,y,bW,bH,4);ctx.fill();
+      ctx.font='bold 12px Inter,sans-serif';
+      ctx.fillStyle=i===1?'rgba(37,99,235,1)':'rgba(75,85,99,.9)';
+      ctx.textAlign='center';ctx.fillText(b.val.toFixed(1)+'s',x+bW/2,y-7);
+      ctx.font='12px Inter,sans-serif';ctx.fillStyle='rgba(55,65,81,.9)';
+      ctx.fillText(b.label,x+bW/2,pad.t+cH+22);
+    });
+    // Significance bracket
+    const x0=startX+bW/2,x1=startX+bW+gap+bW/2,sigY=pad.t+6;
+    ctx.strokeStyle='rgba(37,99,235,.55)';ctx.lineWidth=1.5;
+    ctx.beginPath();ctx.moveTo(x0,sigY+4);ctx.lineTo(x0,sigY);ctx.lineTo(x1,sigY);ctx.lineTo(x1,sigY+4);ctx.stroke();
+    ctx.font='bold 14px sans-serif';ctx.fillStyle='rgba(37,99,235,.85)';ctx.textAlign='center';
+    ctx.fillText('*',(x0+x1)/2,sigY-2);
     // MCID line
     const mcidVal=3.2,mcidY=pad.t+cH-(mcidVal/maxVal)*cH;
-    ctx.strokeStyle='rgba(245,158,11,.7)';ctx.setLineDash([5,4]);ctx.lineWidth=1.2;
+    ctx.strokeStyle='rgba(245,158,11,.75)';ctx.setLineDash([6,4]);ctx.lineWidth=1.5;
     ctx.beginPath();ctx.moveTo(pad.l,mcidY);ctx.lineTo(pad.l+cW,mcidY);ctx.stroke();ctx.setLineDash([]);
-    ctx.font='8px JetBrains Mono,monospace';ctx.fillStyle='rgba(245,158,11,.8)';ctx.textAlign='right';
-    ctx.fillText('MCID',pad.l+cW,mcidY-3);
-    // Arrow "Better" on left
-    ctx.font='8px JetBrains Mono,monospace';ctx.fillStyle='rgba(107,114,128,.6)';ctx.textAlign='left';
-    ctx.save();ctx.translate(pad.l-30,pad.t+cH/2);ctx.rotate(-Math.PI/2);ctx.fillText('↑ Better',0,0);ctx.restore();
+    ctx.font='11px Inter,sans-serif';ctx.fillStyle='rgba(180,120,0,.9)';ctx.textAlign='right';
+    ctx.fillText('MCID',pad.l+cW,mcidY-5);
+    // Better arrow
+    ctx.save();ctx.translate(pad.l-44,pad.t+cH*.45);ctx.rotate(-Math.PI/2);
+    ctx.font='11px Inter,sans-serif';ctx.fillStyle='rgba(107,114,128,.7)';
+    ctx.textAlign='center';ctx.fillText('↑ Better',0,0);ctx.restore();
   }
   const obs=new IntersectionObserver(e=>{if(e[0].isIntersecting)draw();});
-  obs.observe(c);
-  draw();
+  obs.observe(c);window.addEventListener('resize',draw);draw();
 })();
 
 // ── Sensor canvas: wireless EMG signal quality ─
@@ -1313,88 +1314,58 @@ function resize(canvas){
     const W=c.offsetWidth||360,H=190;
     if(c.width!==W*(devicePixelRatio||1)){c.width=W*(devicePixelRatio||1);c.height=H*(devicePixelRatio||1);ctx.scale(devicePixelRatio||1,devicePixelRatio||1);}
     ctx.clearRect(0,0,W,H);ctx.fillStyle='#F8FAFF';ctx.fillRect(0,0,W,H);
-
-    const pad={l:52,r:20,t:28,b:36};
-    const cW=W-pad.l-pad.r, cH=H-pad.t-pad.b;
-    const maxY=70, minY=10;
-    const yRange=maxY-minY;
-
-    function toY(val){return pad.t+cH-(val-minY)/yRange*cH;}
-
-    // Y axis label (rotated)
-    ctx.save();ctx.translate(12,pad.t+cH/2);ctx.rotate(-Math.PI/2);
-    ctx.font='7.5px JetBrains Mono,monospace';ctx.fillStyle='rgba(107,114,128,.8)';
+    const pad={l:58,r:20,t:28,b:44};
+    const cW=W-pad.l-pad.r,cH=H-pad.t-pad.b;
+    const maxY=70,minY=10,yRange=60;
+    function toY(v){return pad.t+cH-(v-minY)/yRange*cH;}
+    // Y axis label
+    ctx.save();ctx.translate(13,pad.t+cH/2);ctx.rotate(-Math.PI/2);
+    ctx.font='10px Inter,sans-serif';ctx.fillStyle='rgba(55,65,81,.85)';
     ctx.textAlign='center';ctx.fillText('Normalized Lever Press Range (%)',0,0);ctx.restore();
-
     // Grid + Y ticks
-    ctx.strokeStyle='rgba(229,231,235,.9)';ctx.lineWidth=1;
     [10,20,30,40,50,60,70].forEach(v=>{
       const y=toY(v);
+      ctx.strokeStyle='rgba(229,231,235,1)';ctx.lineWidth=1;
       ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(pad.l+cW,y);ctx.stroke();
-      ctx.font='8px JetBrains Mono,monospace';ctx.fillStyle='rgba(107,114,128,.7)';
-      ctx.textAlign='right';ctx.fillText(v,pad.l-5,y+3);
+      ctx.font='11px Inter,sans-serif';ctx.fillStyle='rgba(75,85,99,.85)';
+      ctx.textAlign='right';ctx.fillText(v,pad.l-7,y+4);
     });
-
-    // Two groups: Catch Trial (x=0.28) and BCSI On (x=0.72)
-    const catchX=pad.l+cW*0.28, bcsiX=pad.l+cW*0.72;
-    const bW=cW*0.18;
-
-    // Group means: Catch ~21, BCSI ~39
-    const catchMean=21, bcsiMean=39;
-    // Error bars (SE ~2.5)
-    const catchSE=2.5, bcsiSE=2.8;
-
+    const catchX=pad.l+cW*0.28,bcsiX=pad.l+cW*0.72,bW=cW*0.18;
     // Bars
-    [[catchX,catchMean,'rgba(180,190,210,0.85)','Catch Trial'],[bcsiX,bcsiMean,'rgba(37,99,235,0.85)','BCSI On']].forEach(([x,mean,col,lbl])=>{
+    [[catchX,21,'rgba(180,190,210,0.85)','Catch Trial'],[bcsiX,39,'rgba(37,99,235,0.85)','BCSI On']].forEach(([x,mean,col,lbl])=>{
       const bH=toY(minY)-toY(mean);
-      ctx.fillStyle=col;
-      ctx.beginPath();ctx.roundRect(x-bW/2,toY(mean),bW,bH,3);ctx.fill();
+      ctx.fillStyle=col;ctx.beginPath();ctx.roundRect(x-bW/2,toY(mean),bW,bH,3);ctx.fill();
       // Error bar
-      const se=x===catchX?catchSE:bcsiSE;
+      const se=x===catchX?2.5:2.8;
       ctx.strokeStyle='rgba(55,65,81,.7)';ctx.lineWidth=1.5;
       ctx.beginPath();ctx.moveTo(x,toY(mean+se));ctx.lineTo(x,toY(mean-se));ctx.stroke();
       ctx.beginPath();ctx.moveTo(x-5,toY(mean+se));ctx.lineTo(x+5,toY(mean+se));ctx.stroke();
       ctx.beginPath();ctx.moveTo(x-5,toY(mean-se));ctx.lineTo(x+5,toY(mean-se));ctx.stroke();
       // X label
-      ctx.font='8.5px JetBrains Mono,monospace';ctx.fillStyle='rgba(55,65,81,.85)';
-      ctx.textAlign='center';ctx.fillText(lbl,x,pad.t+cH+16);
+      ctx.font='12px Inter,sans-serif';ctx.fillStyle='rgba(55,65,81,.9)';
+      ctx.textAlign='center';ctx.fillText(lbl,x,pad.t+cH+22);
     });
-
-    // Individual subject lines + dots (4 subjects matching figure colors)
-    const subjects=[
-      {catch:32,bcsi:60,col:'#F59E0B'},  // yellow — high responder
-      {catch:31,bcsi:40,col:'#60A5FA'},  // light blue
-      {catch:21,bcsi:38,col:'#F87171'},  // red/pink
-      {catch:20,bcsi:36,col:'#34D399'},  // teal (implied by mean)
-    ];
-    subjects.forEach(s=>{
-      // Open circles
+    // Individual subject lines
+    [{catch:32,bcsi:60,col:'#F59E0B'},{catch:31,bcsi:40,col:'#60A5FA'},{catch:21,bcsi:38,col:'#F87171'},{catch:20,bcsi:36,col:'#34D399'}].forEach(s=>{
       ctx.strokeStyle=s.col;ctx.lineWidth=1.5;ctx.fillStyle='#fff';
-      // Catch dot
       ctx.beginPath();ctx.arc(catchX,toY(s.catch),4,0,Math.PI*2);ctx.fill();ctx.stroke();
-      // BCSI dot
       ctx.beginPath();ctx.arc(bcsiX,toY(s.bcsi),4,0,Math.PI*2);ctx.fill();ctx.stroke();
-      // Connecting line
       ctx.beginPath();ctx.moveTo(catchX+4,toY(s.catch));ctx.lineTo(bcsiX-4,toY(s.bcsi));
       ctx.strokeStyle=s.col;ctx.lineWidth=1.2;ctx.setLineDash([3,3]);ctx.stroke();ctx.setLineDash([]);
     });
-
-    // Significance bracket ** 
-    const sigY=toY(bcsiMean+bcsiSE)-14;
+    // Significance bracket **
+    const sigY=toY(39+2.8)-14;
     ctx.strokeStyle='rgba(37,99,235,.6)';ctx.lineWidth=1.3;
     ctx.beginPath();ctx.moveTo(catchX,sigY);ctx.lineTo(catchX,sigY-4);ctx.lineTo(bcsiX,sigY-4);ctx.lineTo(bcsiX,sigY);ctx.stroke();
-    ctx.font='bold 11px sans-serif';ctx.fillStyle='rgba(37,99,235,.8)';ctx.textAlign='center';
-    ctx.fillText('**',(catchX+bcsiX)/2,sigY-6);
-
+    ctx.font='bold 14px sans-serif';ctx.fillStyle='rgba(37,99,235,.85)';ctx.textAlign='center';
+    ctx.fillText('**',(catchX+bcsiX)/2,sigY-5);
     // Better arrow
-    ctx.save();ctx.translate(pad.l-38,pad.t+cH*.35);ctx.rotate(-Math.PI/2);
-    ctx.font='8px JetBrains Mono,monospace';ctx.fillStyle='rgba(107,114,128,.6)';
+    ctx.save();ctx.translate(pad.l-44,pad.t+cH*.4);ctx.rotate(-Math.PI/2);
+    ctx.font='11px Inter,sans-serif';ctx.fillStyle='rgba(107,114,128,.7)';
     ctx.textAlign='center';ctx.fillText('↑ Better',0,0);ctx.restore();
   }
   const obs=new IntersectionObserver(e=>{if(e[0].isIntersecting)draw();});
-  obs.observe(c);
-  window.addEventListener('resize',draw);
-  draw();
+  obs.observe(c);window.addEventListener('resize',draw);draw();
 })();
 
 
