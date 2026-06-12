@@ -366,6 +366,9 @@ footer span{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:rgba(
     <button class="proj-nav-item" onclick="showPanel('scs')">
       <span class="pni-dot"></span>Spinal Stimulation
     </button>
+    <button class="proj-nav-item" onclick="showPanel('train')">
+      <span class="pni-dot"></span>Train Monitoring
+    </button>
   </div>
 
   <!-- Panels -->
@@ -655,6 +658,120 @@ footer span{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:rgba(
               <div class="how-item"><div class="how-num" style="background:#22C55E">→</div><div class="how-body">Combined day (SCS) + night (sleep-stage TMR) therapy for maximal motor recovery</div></div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ TRAIN WAGON MONITORING ═══ -->
+    <div class="proj-panel" id="panel-train">
+      <div class="panel-header" data-r>
+        <div>
+          <span class="section-label">Embedded Systems · Signal Processing · LabVIEW · IoT</span>
+          <div class="panel-title">Wagon Condition Monitoring — <em>real-time fault<br/>detection for passenger trains.</em></div>
+        </div>
+        <span class="badge badge-wip" style="background:#FEF3C7;color:#D97706">◈ Completed · Iran Railway</span>
+      </div>
+      <p class="panel-desc" data-r>A multi-sensor condition monitoring system for passenger rail wagons, measuring six subsystems in real time — wheel flat detection, axle bearing temperature, brake health, transformer performance, battery/charger status, and refrigerator temperature. Alerts are displayed onboard for the technical officer, logged to a database, and transmitted via SMS/internet to maintenance teams before the train arrives at the station.</p>
+
+      <!-- Stats bar -->
+      <div class="stats-bar stats-bar-3" data-r>
+        <div class="stat-cell"><div class="stat-cell-num">6</div><span class="stat-cell-unit">Subsystems</span><div class="stat-cell-desc">monitored in real time</div></div>
+        <div class="stat-cell"><div class="stat-cell-num">8</div><span class="stat-cell-unit">Axles / wagon</span><div class="stat-cell-desc">wheel flat + bearing sensors per bogie</div></div>
+        <div class="stat-cell"><div class="stat-cell-num">2</div><span class="stat-cell-unit">Detection methods</span><div class="stat-cell-desc">autocorrelation + virtual mass-spring resonance</div></div>
+      </div>
+
+      <!-- Two-col: architecture left, right col stack -->
+      <div class="two-col" data-r>
+
+        <!-- LEFT: System architecture -->
+        <div class="card">
+          <span class="card-label">System Architecture</span>
+          <div class="pipeline">
+            <div class="pipe-step">
+              <div class="pipe-dot"></div>
+              <div class="pipe-step-title">Sensor Layer</div>
+              <div class="pipe-step-body">ADXL345 3-axis MEMS accelerometer (wheel flat detection) · MLX90614 IR temperature sensor (axle bearing, brake disc, transformer) · ACS712 Hall-effect current sensor · CT current transformer · pressure sensor HOTJ0010FLCK · DS18B20 digital temperature (refrigerator).</div>
+            </div>
+            <div class="pipe-step">
+              <div class="pipe-dot"></div>
+              <div class="pipe-step-title">I/O Boards (ATmega MCUs)</div>
+              <div class="pipe-step-body">Distributed ATmega328P / ATmega2560 boards handle per-subsystem signal acquisition. Communicate via I2C, SPI, and 1-Wire. Slave boards aggregate to Master via serial; Master connects to central PC via Ethernet (TCP/IP).</div>
+            </div>
+            <div class="pipe-step">
+              <div class="pipe-dot"></div>
+              <div class="pipe-step-title">Signal Processing (LabVIEW)</div>
+              <div class="pipe-step-body">Central LabVIEW application receives all sensor streams, applies synchronization across boards with different sampling rates, runs fault detection algorithms, and logs data to a SQL database with timestamps.</div>
+            </div>
+            <div class="pipe-step">
+              <div class="pipe-dot green"></div>
+              <div class="pipe-step-title" style="color:#16A34A">Alarm &amp; Reporting</div>
+              <div class="pipe-step-body">Relative thresholding compares each wheel/disc against the fleet mean — eliminates false alarms from speed, load, and ambient temperature. Faults trigger onboard display alerts, SMS, and web-service notifications to the maintenance team.</div>
+            </div>
+          </div>
+          <div class="tags" style="margin-top:16px">
+            <span class="tag">ADXL345</span><span class="tag">MLX90614</span><span class="tag">ATmega2560</span>
+            <span class="tag">LabVIEW</span><span class="tag">TCP/IP Ethernet</span><span class="tag">GPS fusion</span>
+            <span class="tag">Autocorrelation</span><span class="tag">Data fusion</span><span class="tag">Web service</span>
+          </div>
+        </div>
+
+        <!-- RIGHT: two feature cards stacked -->
+        <div class="right-col">
+
+          <!-- Wheel flat detection card -->
+          <div class="card">
+            <span class="card-label">Key Algorithm — Wheel Flat Detection</span>
+            <p style="font-size:0.85rem;color:var(--ink-2);line-height:1.7;margin-bottom:14px">Wheel flats generate repetitive high-amplitude impulses in the axle accelerometer signal at a frequency proportional to train speed. Two parallel algorithms detect these:</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
+              <div style="background:var(--bg-alt);border-radius:9px;padding:14px;border-left:3px solid var(--blue)">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--blue);margin-bottom:8px;letter-spacing:.04em;text-transform:uppercase">Autocorrelation</div>
+                <div style="font-size:0.8rem;color:var(--ink-3);line-height:1.55">Identifies repeating patterns regardless of waveform shape. Speed estimate from GPS + accelerometer data fusion (weighted inverse-variance). More robust to noise; higher memory use.</div>
+              </div>
+              <div style="background:var(--bg-alt);border-radius:9px;padding:14px;border-left:3px solid #8B5CF6">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:#7C3AED;margin-bottom:8px;letter-spacing:.04em;text-transform:uppercase">Virtual Mass-Spring</div>
+                <div style="font-size:0.8rem;color:var(--ink-3);line-height:1.55">Simulates a damped resonator in software. Three parallel resonators (center ± offset) track wheel rotation frequency. Resonance amplitude ∝ flat severity. Low memory, real-time capable.</div>
+              </div>
+            </div>
+            <!-- Animated wheel flat canvas -->
+            <div style="background:var(--bg-alt);border-radius:9px;padding:12px">
+              <canvas id="trainCanvas" height="100" style="width:100%;border-radius:6px"></canvas>
+              <div class="chart-caption">// Axle accelerometer · periodic impulse from wheel flat · resonator response</div>
+            </div>
+          </div>
+
+          <!-- Alarm logic card -->
+          <div class="card">
+            <span class="card-label">Relative Threshold Alarm Logic</span>
+            <p style="font-size:0.85rem;color:var(--ink-2);line-height:1.65;margin-bottom:12px">Absolute thresholds produce false alarms because temperature, speed, and braking all affect readings. The solution: compare each sensor against the mean of all 8 axles on the same wagon. External factors affect all wheels equally — only a defective component deviates.</p>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--bg-alt);border-radius:8px">
+                <div style="width:8px;height:8px;border-radius:50%;background:var(--blue);flex-shrink:0"></div>
+                <div style="font-size:0.82rem;color:var(--ink-2)"><strong>Wheel flat:</strong> flat severity vs. mean of 8 wheels · relative threshold · configurable duration</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--bg-alt);border-radius:8px">
+                <div style="width:8px;height:8px;border-radius:50%;background:#F59E0B;flex-shrink:0"></div>
+                <div style="font-size:0.82rem;color:var(--ink-2)"><strong>Axle bearing / brake disc:</strong> IR temperature vs. mean of 8 sensors · eliminates ambient + speed effects</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--bg-alt);border-radius:8px">
+                <div style="width:8px;height:8px;border-radius:50%;background:#22C55E;flex-shrink:0"></div>
+                <div style="font-size:0.82rem;color:var(--ink-2)"><strong>Brake pipe pressure:</strong> low-pass filter (τ ≈ minutes) detects chronic low pressure · ignores normal braking transients</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--bg-alt);border-radius:8px">
+                <div style="width:8px;height:8px;border-radius:50%;background:#8B5CF6;flex-shrink:0"></div>
+                <div style="font-size:0.82rem;color:var(--ink-2)"><strong>Transformer:</strong> imbalance, overload, short circuit, efficiency drop, overheating — 6 independent fault types</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Context note -->
+      <div style="background:var(--bg-alt);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-top:20px;display:flex;align-items:flex-start;gap:14px" data-r>
+        <div style="font-size:1.2rem;flex-shrink:0">🚂</div>
+        <div>
+          <div style="font-weight:600;font-size:0.9rem;margin-bottom:5px">Context — Early-career embedded systems &amp; signal processing project</div>
+          <p style="font-size:0.83rem;color:var(--ink-3);line-height:1.65">This project preceded my transition into neural engineering and represents my early foundation in embedded systems, real-time signal processing, and multi-sensor IoT architecture. The core skills developed here — adaptive thresholding, sensor fusion, real-time embedded firmware, and LabVIEW data acquisition — directly informed the hardware and signal processing methods used in subsequent neural engineering work.</p>
         </div>
       </div>
     </div>
@@ -990,6 +1107,59 @@ function setupCanvas(c,H){
     ctx.font='9px Inter,sans-serif'; ctx.fillStyle='rgba(37,99,235,.4)';
     ctx.fillText('50ms cycle',W-64,H-6);
     t+=.018; af=requestAnimationFrame(draw);
+  }
+  const obs=new IntersectionObserver(e=>{ if(e[0].isIntersecting){ init(); if(!af)draw(); }else{ cancelAnimationFrame(af); af=null; } });
+  obs.observe(c); window.addEventListener('resize',()=>init());
+})();
+
+// ── Train wheel flat canvas ──
+(function(){
+  const c=document.getElementById('trainCanvas');
+  if(!c)return;
+  let t=0,af,ctx,W,H;
+  function init(){ const s=setupCanvas(c,100); ctx=s.ctx; W=s.W; H=s.H; }
+  function draw(){
+    if(!ctx)return;
+    ctx.clearRect(0,0,W,H); ctx.fillStyle='#F8FAFF'; ctx.fillRect(0,0,W,H);
+    const half=W/2-6;
+    // Labels
+    ctx.font='8px Inter,sans-serif';
+    ctx.fillStyle='rgba(107,114,128,.8)'; ctx.fillText('ACCELEROMETER (axle)',6,12);
+    ctx.fillStyle='rgba(139,92,246,.8)'; ctx.fillText('RESONATOR OUTPUT',half+12,12);
+    // Divider
+    ctx.strokeStyle='rgba(229,231,235,1)'; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(half+6,0); ctx.lineTo(half+6,H); ctx.stroke();
+    // Flat impulse frequency (simulated ~7Hz)
+    const flatFreq=7, period=1/flatFreq;
+    // Input: periodic impulses with noise
+    ctx.beginPath();
+    for(let x=0;x<half;x++){
+      const nx=x/half*3; // 3 seconds of data
+      const phase=((nx+t*0.4)%period)/period;
+      // Sharp impulse near phase=0
+      const impulse=phase<0.05?Math.exp(-phase*200)*0.7:0;
+      const noise=(Math.random()-0.5)*0.06;
+      const s2=H*0.5+(impulse+noise)*H*0.38;
+      x===0?ctx.moveTo(6+x,s2):ctx.lineTo(6+x,s2);
+    }
+    ctx.strokeStyle='rgba(37,99,235,.65)'; ctx.lineWidth=1.3; ctx.stroke();
+    // Resonator output: growing damped oscillation
+    let amp=0;
+    ctx.beginPath();
+    for(let x=0;x<half-12;x++){
+      const nx=x/(half-12)*3;
+      const phase=((nx+t*0.4)%period)/period;
+      // Each impulse grows the resonator amplitude
+      amp=Math.min(amp*0.995+( phase<0.05?0.18:0 ),0.85);
+      const s2=H*0.5+amp*Math.sin((nx+t*0.4)*flatFreq*Math.PI*2)*H*0.35;
+      x===0?ctx.moveTo(half+12+x,s2):ctx.lineTo(half+12+x,s2);
+    }
+    ctx.strokeStyle='rgba(139,92,246,.75)'; ctx.lineWidth=1.4; ctx.stroke();
+    // Labels
+    ctx.font='8px Inter,sans-serif';
+    ctx.fillStyle='rgba(37,99,235,.5)'; ctx.fillText('flat impulse',6,H-6);
+    ctx.fillStyle='rgba(139,92,246,.5)'; ctx.fillText('resonance ∝ severity',half+12,H-6);
+    t+=0.016; af=requestAnimationFrame(draw);
   }
   const obs=new IntersectionObserver(e=>{ if(e[0].isIntersecting){ init(); if(!af)draw(); }else{ cancelAnimationFrame(af); af=null; } });
   obs.observe(c); window.addEventListener('resize',()=>init());
